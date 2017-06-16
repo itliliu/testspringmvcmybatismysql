@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.we.dao.ReportTypeMapper">
+  <resultMap id="BaseResultMap" type="com.we.bean.ReportType">
+    <id column="ReportTypeID" jdbcType="INTEGER" property="reporttypeid" />
+    <result column="ReportType" jdbcType="VARCHAR" property="reporttype" />
+    <result column="Status" jdbcType="INTEGER" property="status" />
+    <result column="InsertDate" jdbcType="BIGINT" property="insertdate" />
+    <result column="LastModifyDate" jdbcType="BIGINT" property="lastmodifydate" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    ReportTypeID, ReportType, Status, InsertDate, LastModifyDate
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ReportType
+    where ReportTypeID = #{reporttypeid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from ReportType
+    where ReportTypeID = #{reporttypeid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.we.bean.ReportType">
+    insert into ReportType (ReportTypeID, ReportType, Status, 
+      InsertDate, LastModifyDate)
+    values (#{reporttypeid,jdbcType=INTEGER}, #{reporttype,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{insertdate,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.we.bean.ReportType">
+    insert into ReportType
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="reporttypeid != null">
+        ReportTypeID,
+      </if>
+      <if test="reporttype != null">
+        ReportType,
+      </if>
+      <if test="status != null">
+        Status,
+      </if>
+      <if test="insertdate != null">
+        InsertDate,
+      </if>
+      <if test="lastmodifydate != null">
+        LastModifyDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="reporttypeid != null">
+        #{reporttypeid,jdbcType=INTEGER},
+      </if>
+      <if test="reporttype != null">
+        #{reporttype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="insertdate != null">
+        #{insertdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null">
+        #{lastmodifydate,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ReportType">
+    update ReportType
+    <set>
+      <if test="reporttype != null">
+        ReportType = #{reporttype,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="insertdate != null">
+        InsertDate = #{insertdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null">
+        LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ReportTypeID = #{reporttypeid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.we.bean.ReportType">
+    update ReportType
+    set ReportType = #{reporttype,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      InsertDate = #{insertdate,jdbcType=BIGINT},
+      LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+    where ReportTypeID = #{reporttypeid,jdbcType=INTEGER}
+  </update>
+  
+   <select id="getAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from ReportType
+  </select>
+</mapper>

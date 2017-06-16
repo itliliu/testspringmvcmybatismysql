@@ -1,0 +1,202 @@
+/* custom alert - style start*/
+#m-msg-section {
+    position: fixed;
+    z-index: 2031;
+    top: 50%;
+    display: none;
+    width: 100%;
+}
+
+#m-msg-section .alert {
+    display: table;
+    max-width: 80%;
+    margin: 0 auto;
+    -webkit-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+    box-shadow: 1px 2px 5px 0px rgba(0,0,0,0.75);
+}
+
+
+#m-confirm-section.dialog-box {
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    position: fixed;
+    z-index: 99;
+    top: 0;
+    display: block;
+}
+
+#m-confirm-section.dialog-box .dialog {
+    width: 26%;
+    min-height: 150px;
+    position: absolute;
+    left: 40%;
+    top: 30%;
+    background: #fff;
+    border-radius: 12px;
+    text-align: center;
+}
+#m-confirm-section .dialog .dialog-title {
+    min-height: 95px;
+    padding: 35px 30px 20px;
+    font-size: 18px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+}
+#m-confirm-section .dialog .dialog-bottom > button {
+    display: inline-block;
+    float: left;
+    width: 35%;
+    line-height: 28px;
+    font-size: 15px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+}
+#m-confirm-section .dialog .dialog-bottom .confirm-cancel {
+    margin: 13px 5% 13px 10%;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+}
+#m-confirm-section .dialog .dialog-bottom .confirm-cancel:hover {
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+#m-confirm-section .dialog .dialog-bottom .confirm-submit {
+    margin: 13px 10% 13px 5%;
+    color: #fff;
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+}
+#m-confirm-section .dialog .dialog-bottom .confirm-submit:hover {
+    background-color: #286090;
+    border-color: #204d74;
+}
+#m-confirm-section .float-none {
+    float: none!important;
+}
+/* custom alert - style end*/
+.table-cell {
+    display: table-cell;
+}
+/*date plugin style*/
+.datetimepicker .prev .icon-arrow-left:before {
+    content: "\e091";
+}
+.datetimepicker .next .icon-arrow-right:before {
+    content: "\e092";
+}
+/*cunsheng*/
+.modal .modal-header,
+.modal .modal-body,
+.modal .modal-footer
+{
+    padding : 10px;
+}
+.modal .modal-header .close {
+    margin-top: 4px;
+}
+.no-padding {
+	padding : 0!important
+}
+.nodis {
+    display: none;
+}
+.maxw400 {
+	max-width : 400px
+}
+.maxh400 {
+	max-height : 400px
+}
+.cursor {
+    cursor: pointer;
+}
+.upload-block {
+        vertical-align: middle;
+    -webkit-font-smoothing: antialiased;
+    display: block;
+    -webkit-text-stroke-width: 0.2px;
+    -moz-osx-font-smoothing: grayscale;
+    display: inline-block;
+    width:66px;
+    height:66px;
+    background : url(../../images/add.png) 0 0 transparent;
+
+
+}
+/*=====override for ui-select=====*/
+.ui-select-multiple.ui-select-bootstrap {
+    border-width:0;
+}
+.ui-select-multiple.ui-select-bootstrap input.ui-select-search {
+    display: block;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color: #555;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+    -webkit-transition: border-color ease-in-out .15s,-webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+/*======end=====*/
+.load-page-mask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    opacity: .5;
+    filter: alpha(opacity=50);
+    background: #fff url(/images/loading.gif) center center no-repeat;
+    _background-position: 45% 30%;
+    z-index: 99999999;
+}
+
+/*\cunsheng*/
+/* body style */
+body {
+    background-color: #F0F0F2;
+}
+/* 401 page */
+#unauthorized {
+    padding: 30px 20px;
+}
+#unauthorized .error-code {
+    font-size: 9em;
+    font-weight: bold;
+    color: orange;
+}
+#unauthorized .error-text {
+    font-size: 1.2em;
+}
+#unauthorized .jump-text {
+    padding-top: 10px;
+    font-size: 1em;
+}
+#unauthorized .jump-text a {
+    font-weight: bold;
+    color: orangered;
+    cursor: pointer;
+}
+#unauthorized .jump-text span {
+    font-weight: bold;
+    color: red;
+}
+/*preview page*/
+#preview-page,
+#preview-page iframe {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    margin-top: -1px;
+}

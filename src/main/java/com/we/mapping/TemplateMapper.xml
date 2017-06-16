@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.TemplateMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.Template">
+		<id column="TemplateID" property="templateid" jdbcType="INTEGER" />
+		<result column="TemplateName" property="templatename" jdbcType="VARCHAR" />
+		<result column="ReportType" property="reporttype" jdbcType="INTEGER" />
+		<result column="Format" property="format" jdbcType="INTEGER" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="ClientID" property="clientid" jdbcType="INTEGER" />
+		<result column="Type" property="type" jdbcType="VARCHAR" />
+		<result column="Userid" property="userid" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+		<result column="Description" property="description"></result>
+		<result column="FileUrl" property="fileurl" jdbcType="VARCHAR"></result>
+		<result column="PowerBITemplateID" property="powerbitemplateid"
+			jdbcType="INTEGER"></result>
+	</resultMap>
+
+	<sql id="Base_Column_List">
+		TemplateID, TemplateName, ReportType, Format, Status,
+		ClientID, Type, Userid,Description,FileUrl,
+		PowerBITemplateID,InsertDate,LastModifyDate
+	</sql>
+
+	<sql id="Sql_Where">
+		<if test="template!=null">
+			<if test="template.templatename != null">
+				AND TemplateName like concat
+				('%',#{template.templatename,jdbcType=VARCHAR},'%')
+			</if>
+			<if test='template.reporttype != null and template.reporttype!=-1'>
+				AND ReportType = #{template.reporttype,jdbcType=VARCHAR}
+			</if>
+			<if test='template.format != null and template.format!=-1'>
+				AND Format = #{template.format,jdbcType=VARCHAR}
+			</if>
+			<if test="template.status != null">
+				AND Status = #{template.status,jdbcType=INTEGER}
+			</if>
+			<if test='template.type != null and template.type!="0"'>
+				AND Type = #{template.type,jdbcType=VARCHAR}
+			</if>
+			<if test="template.userid != null">
+				AND Userid = #{template.userid,jdbcType=INTEGER}
+			</if>
+		</if>
+	</sql>
+
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM Template
+		WHERE TemplateID = #{templateid,jdbcType=INTEGER}
+	</select>
+	<select id="deleteByPrimaryKey" parameterType="java.lang.Integer" resultType="int">
+		{
+			CALL DeleteTemplate
+			(
+				#{templateid,jdbcType=INTEGER}
+			)
+		}
+	</select>
+	<insert id="insert" parameterType="com.we.bean.Template"
+		useGeneratedKeys="true" keyProperty="templateid">
+		insert into Template (TemplateID,
+		TemplateName, ReportType,
+		Format, Status, ClientID,
+		Type, Userid,
+		InsertDate,
+		LastModifyDate,Description,FileUrl,PowerBITemplateid)
+		values (#{templateid,jdbcType=INTEGER},
+		#{templatename,jdbcType=VARCHAR},
+		#{reporttype,jdbcType=VARCHAR},
+		#{format,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER},
+		#{clientid,jdbcType=INTEGER},
+		#{type,jdbcType=VARCHAR},
+		#{userid,jdbcType=INTEGER},
+		unix_timestamp(now()),
+		unix_timestamp(now()),#{fileurl,jdbcType=VARCHAR},#{powerbitemplateid,jdbcType=INTEGER,}
+		#{description,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.Template"
+		useGeneratedKeys="true" keyProperty="templateid">
+		insert into Template
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="templateid != null">
+				TemplateID,
+			</if>
+			<if test="templatename != null">
+				TemplateName,
+			</if>
+			<if test="reporttype != null">
+				ReportType,
+			</if>
+			<if test="format != null">
+				Format,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="clientid != null">
+				ClientID,
+			</if>
+			<if test="type != null">
+				Type,
+			</if>
+			<if test="userid != null">
+				userid,
+			</if>
+
+			InsertDate,
+
+
+			LastModifyDate,
+
+			<if test="description!=null">
+				Description,
+			</if>
+			<if test="fileurl!=null">
+				FileUrl,
+			</if>
+			<if test="powerbitemplateid!=null">
+				PowerBITemplateid,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="templateid != null">
+				#{templateid,jdbcType=INTEGER},
+			</if>
+			<if test="templatename != null">
+				#{templatename,jdbcType=VARCHAR},
+			</if>
+			<if test="reporttype != null">
+				#{reporttype,jdbcType=VARCHAR},
+			</if>
+			<if test="format != null">
+				#{format,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+
+			unix_timestamp(now()),
+
+
+			unix_timestamp(now()),
+
+			<if test="description!=null">
+				#{description},
+			</if>
+			<if test="fileurl!=null">
+				#{fileurl},
+			</if>
+			<if test="powerbitemplateid!=null">
+				#{powerbitemplateid},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.Template">
+		UPDATE Template
+		<set>
+			<if test="templatename != null">
+				TemplateName = #{templatename,jdbcType=VARCHAR},
+			</if>
+			<if test="reporttype != null">
+				ReportType = #{reporttype,jdbcType=VARCHAR},
+			</if>
+			<if test="format != null">
+				Format = #{format,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="type != null">
+				Type = #{type,jdbcType=VARCHAR},
+			</if>
+			<if test="userid != null">
+				Userid = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+
+			LastModifyDate = unix_timestamp(now()),
+
+
+			<if test="description!=null">
+				Description = #{description},
+			</if>
+			<if test="fileurl!=null">
+				FileUrl = #{fileurl},
+			</if>
+			<if test='powerbitemplateid!=null'>
+				PowerBITemplateid = #{powerbitemplateid},
+			</if>
+		</set>
+		WHERE TemplateID = #{templateid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.Template">
+		UPDATE Template
+		set TemplateName = #{templatename,jdbcType=VARCHAR},
+		ReportType =
+		#{reporttype,jdbcType=VARCHAR},
+		Format = #{format,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		ClientID =
+		#{clientid,jdbcType=INTEGER},
+		Type = #{type,jdbcType=VARCHAR},
+		Userid =
+		#{userid,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = unix_timestamp(now())
+		WHERE TemplateID =
+		#{templateid,jdbcType=INTEGER}
+	</update>
+
+    <select id="updateTemplate" parameterType="com.we.bean.Template" resultType="int">
+    {
+    	CALL we_project.UpdateTemplate(
+    		#{templateid,jdbcType=INTEGER},
+			#{templatename,jdbcType=VARCHAR},
+			#{reporttype,jdbcType=INTEGER},
+			#{format,jdbcType=INTEGER},
+			#{status,jdbcType=INTEGER},
+			#{clientid,jdbcType=INTEGER},
+			#{type,jdbcType=VARCHAR},
+			#{userid,jdbcType=INTEGER},		
+			#{description,jdbcType=VARCHAR},
+			#{fileurl,jdbcType=VARCHAR},
+			#{powerbitemplateid,jdbcType=INTEGER}
+    	)
+    }
+    </select>
+    
+	<select id="selectPublicByUidAndClientForPage" resultType="map"
+		parameterType="map">
+		SELECT t.TemplateID, t.TemplateName, t.ReportType, t.Format, t.Status,
+		t.ClientID,
+		t.Type, t.Userid, t.InsertDate, t.LastModifyDate, t.Description,
+		t.PowerBITemplateID,
+		c.ClientName Client ,`User`.UserName UserName,
+		CASE
+		WHEN t.FileUrl IS NULL THEN ''
+		ELSE t.FileUrl END AS FileUrl
+		FROM Template t
+		LEFT JOIN Client c
+		ON t.ClientID= c.ClientID
+		LEFT JOIN `User`
+		ON `User`.UserID = t.Userid
+		WHERE t.userid != #{userid}
+		<if test='clientids!=null '>
+			AND t.clientid in (
+			<foreach collection="clientids" item="item" index="index"
+				separator=",">
+				#{item}
+			</foreach>
+			)
+		</if>
+		<if test="clientid!=null  and clientid>0">
+			AND (c.ClientID=#{clientid} or c.ParentID=#{clientid} )
+		</if>
+		<include refid="Sql_Where" />
+		ORDER BY(t.TemplateID) desc
+		<if test="rows!=null and page!=null">
+			limit ${page},${rows}
+		</if>
+	</select>
+
+	<select id="selectOwnerByUidAndClientForPage" resultType="map"
+		parameterType="map">
+		SELECT t.TemplateID, t.TemplateName, t.ReportType, t.Format, t.Status,
+		t.ClientID,
+		t.Type, t.Userid, t.InsertDate, t.LastModifyDate, t.Description,
+		t.PowerBITemplateID,
+		c.ClientName Client ,`User`.UserName UserName,
+		CASE
+		WHEN t.FileUrl IS NULL THEN ''
+		ELSE t.FileUrl END AS FileUrl
+		FROM Template t
+		LEFT JOIN Client c
+		ON t.ClientID= c.ClientID
+		LEFT JOIN `User` on `User`.UserID = t.Userid
+		WHERE t.userid = #{userid}
+		<if test='clientids!=null and clientids.length>0'>
+			AND clientid in (
+			<foreach collection="clientids" item="item" index="index"
+				separator=",">
+				#{item}
+			</foreach>
+			)
+		</if>
+		<if test=" clientid>0">
+			AND (c.ClientID=#{clientid} or c.ParentID=#{clientid})
+		</if>
+		<include refid="Sql_Where" />
+		ORDER BY(t.TemplateID) desc
+		<if test="rows!=null and page!=null">
+			limit ${page},${rows}
+		</if>
+	</select>
+
+	<select id="getCountOwnerByUidAndClientForPage" resultType="int"
+		parameterType="map">
+		SELECT COUNT(*) FROM (
+		SELECT t.*,c.ClientName client ,`User`.UserName
+		UserName
+		FROM Template t
+		LEFT JOIN Client c
+		on t.ClientID= c.ClientID
+		LEFT JOIN `User` on `User`.UserID = t.Userid
+		WHERE t.userid = #{userid}
+		<if test='clientids!=null and clientids.length>0'>
+			AND clientid in (
+			<foreach collection="clientids" item="item" index="index"
+				separator=",">
+				#{item}
+			</foreach>
+			)
+		</if>
+		<include refid="Sql_Where" />
+		<if test=" clientid>0">
+			AND (c.ClientID=#{clientid} or c.ParentID=#{clientid})
+		</if>
+		) as countnum
+	</select>
+
+	<select id="getCountPublicByUidAndClientForPage" resultType="int"
+		parameterType="map">
+		SELECT COUNT(*) FROM (
+		SELECT t.*,c.ClientName client ,`User`.UserName
+		UserName FROM Template t
+		LEFT JOIN Client c
+		on t.ClientID= c.ClientID
+		LEFT JOIN `User` on `User`.UserID = t.Userid
+		WHERE t.userid != #{userid}
+		<if test='clientids!=null '>
+			AND t.clientid in (
+			<foreach collection="clientids" item="item" index="index"
+				separator=",">
+				#{item}
+			</foreach>
+			)
+		</if>
+		<if test="clientid!=null  and clientid>0">
+			AND (c.ClientID=#{clientid} or c.ParentID=#{clientid} )
+		</if>
+		<include refid="Sql_Where" />
+		)as countnum
+	</select>
+
+	<select id="selectByMaps" resultType="map" parameterType="map">
+		SELECT t.*,c.ClientName client,`User`.UserName userName FROM Template
+		t LEFT JOIN Client c on
+		t.ClientID= c.ClientID LEFT JOIN `User` on
+		`User`.UserID = t.Userid
+		<include refid="Sql_Where" />
+		ORDER BY(t.TemplateID) desc
+		<if test="rows!=null and page!=null">
+			limit ${page},${rows}
+		</if>
+	</select>
+
+	<select id="getCountByMaps" resultType="int" parameterType="map">
+		SELECT COUNT(*) FROM Template t LEFT JOIN Client c on
+		t.ClientID=
+		c.ClientID LEFT JOIN `User` on `User`.UserID = t.Userid
+		<include refid="Sql_Where" />
+	</select>
+
+	<select id="getRecentTemplate" resultType="map" parameterType="map"
+		statementType="CALLABLE">
+		{
+		CALL GetRecentTemplate(
+		#{userid, jdbcType=INTEGER},
+		#{clientid, jdbcType=INTEGER},
+		#{type, jdbcType=VARCHAR}
+		)
+		}
+	</select>
+	<parameterMap type="java.util.Map" id="Report_template_param"></parameterMap>
+
+	<select id="getTemplateListForReport" resultType="map"
+		parameterMap="Report_template_param">
+		SELECT temp1.TemplateID AS reportTempID,
+		temp1.TemplateName AS reportTempName,
+		temp2.TemplateID AS powerBITempID,
+		temp2.TemplateName AS powerBITempName
+		FROM Template temp1
+		INNER JOIN Template temp2
+		ON temp1.PowerBITemplateID=temp2.TemplateID
+		WHERE temp1.ClientID =
+		#{clientid, jdbcType=INTEGER}
+		AND temp1.ReportType = #{reportType, jdbcType=INTEGER}
+		AND temp1.Format = #{format, jdbcType=INTEGER}
+		AND (temp1.PowerBITemplateID IS NOT NULL OR temp1.PowerBITemplateID>=0)
+	</select>
+
+	<select id="getAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM Template
+	</select>
+
+	<select id="getPowerBITemplateByClientid" resultType="map"
+		parameterType="int">
+		SELECT TemplateID,templatename
+		FROM Template WHERE ClientID = #{clientid} AND type='PowerBI Template'
+	</select>
+
+	<update id="updatePower">
+		UPDATE Template SET PowerBITemplateID = #{powerId} WHERE TemplateID in
+		(
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			#{item}
+		</foreach>
+		)
+	</update>
+
+	<select id="selectByPrimaryKeyToMap" resultType="map"
+		parameterType="java.lang.Integer">
+		{
+			CALL GetTemplateDetail(
+				#{templateid,jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<select id="getClientIDAndParentID" resultType="map"
+		parameterType="java.lang.Integer">
+		SELECT ClientID as clientID, IFNULL(ParentID, 0) as parentID
+		FROM Client 
+		WHERE ClientID=#{clientID, jdbcType=INTEGER}
+	</select>
+</mapper>

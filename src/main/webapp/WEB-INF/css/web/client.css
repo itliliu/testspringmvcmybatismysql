@@ -1,0 +1,13 @@
+@charset "utf-8";
+/* Generated : 2017-04-24 18:34:25 */
+/*
+syntex:
+ ~"/" ==> /
+filter:e("ms:alwaysHasItsOwnSyntax.For.Stuff()");
+background: url("@{imgPath}/login_bg.png") ; 必须添加 ”“
+*
+@import (inline) : 加路径 以便合并文件 
+@import (css) 
+@import (less) 
+
+*/

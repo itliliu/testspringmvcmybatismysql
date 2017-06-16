@@ -1,0 +1,88 @@
+<section class="checkBrief">
+    <div ng-controller="projectmBriefCtrl">
+        <h3>CURRENT BRIEFS</h3>
+        <div class="receivedinfo ">
+            <div class="form-group first-group">
+                <h4>Received Reports</h4>
+                <a class="btn"><img src="images/undo.png"></a>
+                <a class="btn"><img src="images/export.png"></a>
+                <a class="btn"><img src="images/garbage.png"></a>
+            </div>
+            <div class="form-group">
+                <div class="checkboxFour">
+                    <input type="checkbox"  value="1" id="checkboxInput" ng-model="selectAll" ng-click="received(selectAll)">
+                    <label for="checkboxInput"></label>
+                </div>
+                <label class="label-title">All</label>
+                <label class="label-title1">ID</label>
+                <label class="label-title2">Title</label>
+                <label class="label-title3">Date</label>
+            </div>
+            <div class="form-group" ng-repeat="brief in briefList">
+                <div class="checkboxFour">
+                    <input type="checkbox"  value="1" id="checkboxInput{{$index}}" name="checkboxInput{{$index}}" ng-checked="selectAll" ng-model="brief.state">
+                    <label for="checkboxInput{{$index}}"></label>
+                </div>
+                <i ng-click="toggle(brief)" class="fa fa-star" ng-class="{'star-color':brief.isFavorite}"></i>
+                <label class ="label-detinfo implabel">{{brief.id}}</label>
+                <label class="label-detinfo">{{brief.title}}</label>
+                <label class="label-detinfo">{{brief.date}}</label>
+            </div>
+            <div class="form-group paging">
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">...</a></li>
+                    <li><a href="#">16</a></li>
+                    <li><a href="#">17</a></li>
+                    <li><a href="#">18</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="completed">
+            <div class="form-group first-group">
+                <h4>In Progress</h4>
+                <a class="btn"><img src="images/undo.png"></a>
+                <a class="btn"><img src="images/export.png"></a>
+            </div>
+            <div class="form-group">
+                <div class="checkboxFour">
+                    <input type="checkbox"  value="1" id="checkboxFourInput" ng-model="inSelectAll" ng-click="Progress(inSelectAll)">
+                    <label for="checkboxFourInput"></label>
+                </div>
+                <label class="label-title">All</label>
+                <label class="label-title1">ID</label>
+                <label class="label-title2">Title</label>
+                <label class="label-title3">Date</label>
+            </div>
+            <div class="form-group" ng-repeat="inBrief in inprocessList">
+                <div class="checkboxFour">
+                    <input type="checkbox"  value="1" id="checkboxFourInput{{$index}}" name="checkboxFourInput{{$index}}" ng-checked="inSelectAll" ng-model="inBrief.state">
+                    <label for="checkboxFourInput{{$index}}"></label>
+                </div>
+                <i ng-click="toggle(inBrief)" class="fa fa-star" ng-class="{'star-color':inBrief.isFavorite}"></i>
+                <label class ="label-detinfo implabel">{{inBrief.id}}</label>
+                <label class="label-detinfo">{{inBrief.title}}</label>
+                <label class="label-detinfo">{{inBrief.date}}</label>
+            </div>
+            <div class="form-group paging">
+                <ul class="pagination">
+                    <li><a href="#">&laquo;</a></li>
+                    <li><a href="#">1</a></li>
+                    <li><a href="#">2</a></li>
+                    <li><a href="#">3</a></li>
+                    <li><a href="#">4</a></li>
+                    <li><a href="#">...</a></li>
+                    <li><a href="#">16</a></li>
+                    <li><a href="#">17</a></li>
+                    <li><a href="#">18</a></li>
+                    <li><a href="#">&raquo;</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>

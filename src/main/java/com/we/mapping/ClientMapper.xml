@@ -1,0 +1,264 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ClientMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.Client">
+		<id column="ClientID" property="clientid" jdbcType="INTEGER" />
+		<result column="ClientName" property="clientname" jdbcType="VARCHAR" />
+		<result column="Logo" property="logo" jdbcType="VARCHAR" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+		<result column="ParentID" property="parentid" jdbcType="INTEGER" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ClientID, ClientName, Logo, InsertDate, LastModifyDate,
+		ParentID,Status 
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM Client
+		WHERE ClientID = #{clientid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM Client
+		WHERE ClientID = #{clientid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.Client" useGeneratedKeys="true" keyProperty="clientid">
+		INSERT INTO Client (
+		ClientName, Logo,
+		InsertDate, LastModifyDate, ParentID
+		)
+		VALUES
+		( #{clientname,jdbcType=VARCHAR},
+		#{logo,jdbcType=VARCHAR},
+		unix_timestamp(now()),
+		unix_timestamp(now()), 
+		#{parentid,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.Client">
+		INSERT INTO Client
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="clientid != null">
+				ClientID,
+			</if>
+			<if test="clientname != null">
+				ClientName,
+			</if>
+			<if test="logo != null">
+				Logo,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			
+				LastModifyDate,
+			
+			<if test="parentid != null">
+				ParentID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="clientname != null">
+				#{clientname,jdbcType=VARCHAR},
+			</if>
+			<if test="logo != null">
+				#{logo,jdbcType=VARCHAR},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			
+				LastModifyDate,
+			
+			<if test="parentid != null">
+				#{parentid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.Client">
+		UPDATE Client
+		<set>
+			<if test="clientname != null">
+				ClientName = #{clientname,jdbcType=VARCHAR},
+			</if>
+			<if test="logo != null">
+				Logo = #{logo,jdbcType=VARCHAR},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				ParentID = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="status !=null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+		</set>
+		WHERE ClientID = #{clientid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.Client">
+		update Client
+		set
+		ClientName = #{clientname,jdbcType=VARCHAR},
+		Logo =
+		#{logo,jdbcType=VARCHAR},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+		Status = #{status,jdbcType=INTEGER},
+		ParentID =
+		#{parentid,jdbcType=INTEGER}
+		WHERE ClientID =
+		#{clientid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectParentByUid" resultType="map" parameterType="int">
+		{
+			CALL GetParentClient(
+				#{uid, jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<select id="isParentByPrimaryKey" resultType="int"
+		parameterType="int">
+		SELECT count(*) FROM Client WHERE ParentID=#{id}
+	</select>
+
+	<select id="selectByParentId" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM Client
+		WHERE parentId = #{parentId,jdbcType=INTEGER} order
+		by(ClientName)
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM Client Order By ClientID Desc
+	</select>
+	
+	<select id="getClientByUserid" resultMap="BaseResultMap"
+		parameterType="map">
+		SELECT Client.ClientID, Client.ClientName, Client.Logo, 
+			Client.InsertDate, Client.LastModifyDate,
+			Client.ParentID,Client.Status		
+		FROM Client 
+		LEFT JOIN UserClientMap 
+		ON Client.ClientID =UserClientMap.ClientID  
+		WHERE UserClientMap.userid = #{userid}
+		<if test="userClientids!=null">
+			AND Client.ClientID in(
+			<foreach collection="userClientids" item="item" index="index" separator=",">
+			#{item}
+			</foreach>
+			) 
+		</if>
+	</select>
+	
+	
+	<select id="getParents" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />	
+		FROM Client WHERE ParentID=0 or ParentID is null Order By ClientID Desc
+	</select>
+	
+	<select id="getChildren" resultMap="BaseResultMap">
+		SELECT <include refid="Base_Column_List" />	
+		FROM Client WHERE ParentID!=0 Order By ClientID Desc
+	</select>
+	
+	<select id="insertClient" resultType="int" parameterType="com.we.bean.Client" statementType="CALLABLE" >
+		{
+			CALL InsertClient(
+				#{clientname, jdbcType=VARCHAR},
+				#{clientid, jdbcType=INTEGER},
+				#{parentid, jdbcType=INTEGER}
+			)
+		}
+	</select>
+	<select id="selectByClientName" resultMap="BaseResultMap"
+		parameterType="string">
+		SELECT 
+		<include refid="Base_Column_List" />
+		FROM Client
+		WHERE ClientName = #{clientName}
+	</select>
+	<select id="getClientNameByClientID" parameterType="java.lang.Integer" resultType="map">
+		SELECT ClientName AS clientName 
+		FROM Client 
+		WHERE ClientID=#{clientID, jdbcType=INTEGER} 
+	</select>
+	
+	<select id="selectChildByUid" resultType="map"
+		parameterType="int">
+		SELECT client.ParentID id,client.ClientName name,userClientMap.isDefault AS 'default',client.Status AS 'isDeactivated'
+          FROM UserClientMap userClientMap 
+            LEFT JOIN Client client 
+            ON (userClientMap.ClientID = client.ClientID )
+                    WHERE userClientMap.UserID = #{uid} AND client.parentId != 0 
+                    ORDER BY(client.ClientName);
+	</select>
+	
+	
+	<select id="selectParentByChild" resultType="map"
+		parameterType="int">
+		SELECT ClientID id,ClientName name,0 AS 'default' ,Status AS 'isDeactivated'
+          FROM Client   WHERE ClientID in
+          <foreach collection="list" item="map" index="index"
+            open="(" close=")" separator=",">
+            #{map.id}
+        </foreach> 
+	</select>
+	
+	
+	<select id="selectByUidAndParentId" resultMap="BaseResultMap">
+		SELECT Client.ClientID, Client.ClientName, Client.Logo, Client.InsertDate, Client.LastModifyDate,
+		Client.ParentID,Client.Status 
+          FROM UserClientMap userClientMap 
+            LEFT JOIN Client  
+            ON (userClientMap.ClientID = Client.ClientID  )
+                    WHERE userClientMap.UserID = #{uid} AND Client.parentId = #{parentid} 
+                    ORDER BY(Client.ClientName)
+	</select>
+	<select id="selectStatusByClientID" parameterType="int" resultType="boolean">
+	SELECT 
+    CASE COUNT(Status)
+        WHEN 0 THEN 1
+        WHEN 1 THEN IFNULL(Status,1)
+    END AS isDeacticated
+	FROM Client 
+	WHERE ClientID=#{clientID, jdbcType=INTEGER}
+	</select>
+	<select id="updateClient" parameterType="map" resultType="int">
+	{
+		CALL we_project.UpdateClient(
+			#{clientID,jdbcType=INTEGER},
+			#{clientName,jdbcType=VARCHAR},
+			#{clientParentID,jdbcType=INTEGER},
+			#{clientStatus,jdbcType=INTEGER},
+			#{clientType,jdbcType=VARCHAR}
+		)
+	}
+	</select>
+	<select id="selectClientStatusByTemplateID" parameterType="int" resultType="boolean">
+	SELECT 
+    CASE COUNT(cl.Status)
+        WHEN 0 THEN 1
+        WHEN 1 THEN IFNULL(cl.Status,1)
+    END AS isDeacticated
+	FROM Template tl LEFT JOIN Client cl ON tl.ClientID=cl.ClientID 
+	WHERE tl.TemplateID=#{templateID, jdbcType=INTEGER}
+	</select>
+</mapper>

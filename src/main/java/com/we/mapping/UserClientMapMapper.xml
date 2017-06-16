@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.UserClientMapMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.UserClientMap">
+		<id column="MapID" property="mapid" jdbcType="INTEGER" />
+		<result column="ClientID" property="clientid" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+		<result column="UserID" property="userid" jdbcType="INTEGER" />
+		<result column="IsDefault" property="isdefault" jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		MapID, ClientID, InsertDate, LastModifyDate, UserID,
+		IsDefault
+	</sql>
+
+	<sql id="Sql_Where">
+		WHERE 1=1
+		<if test="mapid!=null">
+			And MapID = #{mapid,jdbcType=INTEGER}
+		</if>
+		<if test="clientid != null">
+			And ClientID = #{clientid,jdbcType=INTEGER}
+		</if>
+		<if test="insertdate != null">
+			And InsertDate = #{insertdate,jdbcType=BIGINT}
+		</if>
+		<if test="lastmodifydate != null">
+			And LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+		</if>
+		<if test="userid != null">
+			And UserID = #{userid,jdbcType=INTEGER}
+		</if>
+		<if test="isdefault != null">
+			And IsDefault = #{isdefault,jdbcType=INTEGER}
+		</if>
+	</sql>
+
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM UserClientMap
+		WHERE MapID = #{mapid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM
+		UserClientMap
+		WHERE MapID = #{mapid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.UserClientMap">
+		INSERT INTO UserClientMap
+		(MapID, ClientID, InsertDate,
+		LastModifyDate, UserID, IsDefault
+		)
+		values
+		(#{mapid,jdbcType=INTEGER}, #{clientid,jdbcType=INTEGER},
+		unix_timestamp(now()),
+		unix_timestamp(now()),
+		#{userid,jdbcType=INTEGER}, #{isdefault,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.UserClientMap">
+		INSERT INTO UserClientMap
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="mapid != null">
+				MapID,
+			</if>
+			<if test="clientid != null">
+				ClientID,
+			</if>
+
+			InsertDate,
+
+			LastModifyDate,
+
+			<if test="userid != null">
+				UserID,
+			</if>
+			<if test="isdefault != null">
+				IsDefault,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="mapid != null">
+				#{mapid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+
+			unix_timestamp(now()),
+
+			unix_timestamp(now()),
+
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="isdefault != null">
+				#{isdefault,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.UserClientMap">
+		UPDATE UserClientMap
+		<set>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+
+			LastModifyDate = unix_timestamp(now()),
+
+			<if test="userid != null">
+				UserID = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="isdefault != null">
+				IsDefault = #{isdefault,jdbcType=INTEGER},
+			</if>
+		</set>
+		WHERE MapID = #{mapid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.UserClientMap">
+		UPDATE
+		UserClientMap
+		SET ClientID = #{clientid,jdbcType=INTEGER},
+		InsertDate =
+		#{insertdate,jdbcType=BIGINT},
+		LastModifyDate =
+		#{lastmodifydate,jdbcType=BIGINT},
+		UserID = #{userid,jdbcType=INTEGER},
+		IsDefault = #{isdefault,jdbcType=INTEGER}
+		WHERE MapID =
+		#{mapid,jdbcType=INTEGER}
+	</update>
+
+	<select id="selectByUserClientMap" resultMap="BaseResultMap"
+		parameterType="com.we.bean.UserClientMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM UserClientMap
+		<include refid="Sql_Where" />
+	</select>
+
+	<update id="updateIsDefaultByUid" parameterType="com.we.bean.UserClientMap">
+		UPDATE UserClientMap
+		SET IsDefault = #{isdefault, jdbcType=INTEGER}
+		WHERE 1=1
+		<if test="userid!=null">
+			And UserID = #{userid,jdbcType=INTEGER}
+		</if>
+		<if test="clientid!=null">
+			And ClientID = #{clientid,jdbcType=INTEGER}
+		</if>
+	</update>
+
+	<select id="setDefault" parameterType="com.we.bean.UserClientMap"
+		resultType="java.lang.Integer">
+		{
+		CALL SetDefaultClient(
+		#{userid, jdbcType=INTEGER},
+		#{clientid,jdbcType=INTEGER}
+		)
+		}
+	</select>
+
+	<!-- insert clientid and userid -->
+	<insert id="insertClientid" useGeneratedKeys="true">
+		INSERT INTO UserClientMap
+		(ClientID,UserID,IsDefault,InsertDate,LastModifyDate)
+		values
+		<foreach collection="list" item="item" index="index"
+			separator=",">
+			(#{item},#{userid},0,unix_timestamp(now()),unix_timestamp(now()))
+		</foreach>
+	</insert>
+
+
+	<select id="getClientidByUserid" resultType="int" parameterType="java.lang.Integer">
+		SELECT ClientID
+		FROM UserClientMap
+		WHERE UserID =
+		#{userid,jdbcType=INTEGER}
+	</select>
+
+	<delete id="deleteByClientid" parameterType="java.lang.Integer">
+		DELETE FROM
+		UserClientMap
+		WHERE ClientID = #{clientid,jdbcType=INTEGER}
+	</delete>
+
+	<delete id="deleteByUserId" parameterType="java.lang.Integer">
+		DELETE FROM
+		UserClientMap
+		WHERE UserID = #{userid,jdbcType=INTEGER}
+	</delete>
+
+	<select id="selectByClientidAndRole" parameterType="map"
+		resultType="map">
+		SELECT
+		temp.RoleID,temp.UserID,temp.ClientID
+		FROM
+		(
+		SELECT
+		u.RoleID,
+		ucm.*
+		FROM
+		UserClientMap ucm
+		LEFT JOIN `User` u ON ucm.userid = u.userid
+		) temp
+		WHERE
+		temp.ClientID = #{clientid}
+		AND temp.RoleID = 1
+	</select>
+	
+	
+	
+	<update id="updateClientByUserid" >
+		UPDATE UserClientMap
+		SET ClientID = #{clientid} where userid in
+		 <foreach collection="list" item="map" index="index"
+            open="(" close=")" separator=",">
+            #{map.UserID,jdbcType=INTEGER}
+        </foreach> 
+	</update>
+</mapper>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ProjectBriefDtoMapper" >
+  <resultMap id="BaseResultMap" type="com.we.bean.ProjectBriefDto" >
+    <id column="brief_id" property="briefId" jdbcType="INTEGER" />
+    <result column="user_id" property="userId" jdbcType="INTEGER" />
+    <result column="client_id" property="clientId" jdbcType="INTEGER" />
+    <result column="brief_name" property="briefName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    <result column="modify_date" property="modifyDate" jdbcType="TIMESTAMP" />
+    <result column="is_star" property="isStar" jdbcType="BIT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.we.bean.ProjectBriefDto" extends="BaseResultMap" >
+    <result column="brief_context" property="briefContext" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    brief_id, user_id, client_id, brief_name, status, create_date, modify_date, is_star
+  </sql>
+  <sql id="Blob_Column_List" >
+    brief_context
+  </sql>
+  <!-- 	List<ProjectBrief> listDetailInfo(ProjectBrief biref) throws SQLException; -->
+  <resultMap id="pageNumber" type="java.lang.Integer">
+	<result column="total_page_number" jdbcType="INTEGER" javaType="Integer" />
+</resultMap>
+
+
+<select id="listDetailInfo" statementType="CALLABLE"
+	resultMap="pageNumber,ResultMapWithBLOBs" parameterType="com.we.bean.ProjectParameter">
+	{
+		CALL we_project.listDetailInfo(
+			#{userid,jdbcType=INTEGER},
+			#{status,jdbcType=INTEGER},
+			#{clientID,jdbcType=INTEGER},
+			#{keyword,jdbcType=VARCHAR},
+			#{pageIndex,jdbcType=INTEGER},
+			#{pageSize,jdbcType=INTEGER}
+		)
+	}
+</select>
+  <!-- <select id="listDetailInfo" resultMap="BaseResultMap"
+	parameterType="java.lang.Integer">
+	SELECT
+	<include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+	FROM project_brief
+	WHERE (brief_id = #{briefId,jdbcType=INTEGER} 
+	AND ClientID=#{clientID, jdbcType=INTEGER}  ;
+  </select> -->
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from project_brief
+    where brief_id = #{briefId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from project_brief
+    where brief_id = #{briefId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.we.bean.ProjectBriefDto" >
+    insert into project_brief (brief_id, user_id, client_id, 
+      brief_name, status, create_date, 
+      modify_date, is_star, brief_context
+      )
+    values (#{briefId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{clientId,jdbcType=INTEGER}, 
+      #{briefName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{createDate,jdbcType=TIMESTAMP}, 
+      #{modifyDate,jdbcType=TIMESTAMP}, #{isStar,jdbcType=BIT}, #{briefContext,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.we.bean.ProjectBriefDto" >
+    insert into project_brief
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="briefId != null" >
+        brief_id,
+      </if>
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="clientId != null" >
+        client_id,
+      </if>
+      <if test="briefName != null" >
+        brief_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="modifyDate != null" >
+        modify_date,
+      </if>
+      <if test="isStar != null" >
+        is_star,
+      </if>
+      <if test="briefContext != null" >
+        brief_context,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="briefId != null" >
+        #{briefId,jdbcType=INTEGER},
+      </if>
+      <if test="userId != null" >
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="briefName != null" >
+        #{briefName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isStar != null" >
+        #{isStar,jdbcType=BIT},
+      </if>
+      <if test="briefContext != null" >
+        #{briefContext,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ProjectBriefDto" >
+    update project_brief
+    <set >
+      <if test="userId != null" >
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="clientId != null" >
+        client_id = #{clientId,jdbcType=INTEGER},
+      </if>
+      <if test="briefName != null" >
+        brief_name = #{briefName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyDate != null" >
+        modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isStar != null" >
+        is_star = #{isStar,jdbcType=BIT},
+      </if>
+      <if test="briefContext != null" >
+        brief_context = #{briefContext,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where brief_id = #{briefId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.we.bean.ProjectBriefDto" >
+    update project_brief
+    set user_id = #{userId,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=INTEGER},
+      brief_name = #{briefName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      is_star = #{isStar,jdbcType=BIT},
+      brief_context = #{briefContext,jdbcType=LONGVARCHAR}
+    where brief_id = #{briefId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.we.bean.ProjectBriefDto" >
+    update project_brief
+    set user_id = #{userId,jdbcType=INTEGER},
+      client_id = #{clientId,jdbcType=INTEGER},
+      brief_name = #{briefName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      create_date = #{createDate,jdbcType=TIMESTAMP},
+      modify_date = #{modifyDate,jdbcType=TIMESTAMP},
+      is_star = #{isStar,jdbcType=BIT}
+    where brief_id = #{briefId,jdbcType=INTEGER}
+  </update>
+</mapper>

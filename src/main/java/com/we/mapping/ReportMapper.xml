@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ReportMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.Report">
+		<id column="ReportID" property="reportid" jdbcType="INTEGER" />
+		<result column="UserID" property="userid" jdbcType="INTEGER" />
+		<result column="Name" property="name" jdbcType="VARCHAR" />
+		<result column="ProjectID" property="projectid" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+		<result column="PowerBITemplateID" property="powerbitemplateid"
+			jdbcType="INTEGER" />
+		<result column="TilesProTemplateID" property="tilesprotemplateid"
+			jdbcType="INTEGER" />
+		<result column="Comment" property="comment" jdbcType="VARCHAR" />
+		<result column="ReportType" property="reporttype" jdbcType="VARCHAR" />
+		<result column="DueDate" property="duedate" jdbcType="BIGINT" />
+		<result column="Format" property="format" jdbcType="VARCHAR" />
+		<result column="PowerBITemplateName" property="powerbitemplatename" jdbcType="VARCHAR" />
+		<result column="TilesproTemplateName" property="tilesprotemplatename" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ReportID, UserID, Name, ProjectID, InsertDate, LastModifyDate,
+		PowerBITemplateID,
+		TilesProTemplateID, Comment, ReportType, DueDate, Format
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from Report
+		where ReportID = #{reportid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from Report
+		where ReportID = #{reportid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.ReportResult" useGeneratedKeys="true" keyProperty="reportid">
+		insert into Report (UserID, Name,
+		ProjectID, InsertDate, LastModifyDate,
+		PowerBITemplateID, TilesProTemplateID,
+		Comment, ReportType, DueDate,
+		Format)
+		values (#{userid,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+		#{projectid,jdbcType=INTEGER},
+		unix_timestamp(now()),
+		unix_timestamp(now()),
+		#{powerbitemplateid,jdbcType=INTEGER},
+		#{tilesprotemplateid,jdbcType=INTEGER},
+		#{comment,jdbcType=VARCHAR}, 
+		#{reporttypeid,jdbcType=INTEGER},
+		 #{duedate,jdbcType=BIGINT},
+		#{formatid,jdbcType=INTEGER})
+	</insert>
+
+	<insert id="insertSelective" parameterType="com.we.bean.Report">
+		insert into Report
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reportid != null">
+				ReportID,
+			</if>
+			<if test="userid != null">
+				UserID,
+			</if>
+			<if test="name != null">
+				Name,
+			</if>
+			<if test="projectid != null">
+				ProjectID,
+			</if>
+			InsertDate,
+			LastModifyDate,
+			<if test="powerbitemplateid != null">
+				PowerBITemplateID,
+			</if>
+			<if test="tilesprotemplateid != null">
+				TilesProTemplateID,
+			</if>
+			<if test="comment != null">
+				Comment,
+			</if>
+			<if test="reporttype != null">
+				ReportType,
+			</if>
+			<if test="duedate != null">
+				DueDate,
+			</if>
+			<if test="format != null">
+				Format,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reportid != null">
+				#{reportid,jdbcType=INTEGER},
+			</if>
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				#{projectid,jdbcType=INTEGER},
+			</if>
+			unix_timestamp(now()),
+			unix_timestamp(now()),
+			<if test="powerbitemplateid != null">
+				#{powerbitemplateid,jdbcType=INTEGER},
+			</if>
+			<if test="tilesprotemplateid != null">
+				#{tilesprotemplateid,jdbcType=INTEGER},
+			</if>
+			<if test="comment != null">
+				#{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="reporttype != null">
+				#{reporttypeid,jdbcType=INTEGER},
+			</if>
+			<if test="duedate != null">
+				#{duedate,jdbcType=BIGINT},
+			</if>
+			<if test="format != null">
+				#{formatid,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ReportResult">
+		update Report
+		<set>
+			<if test="userid != null">
+				UserID = #{userid,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				Name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				ProjectID = #{projectid,jdbcType=INTEGER},
+			</if>
+			LastModifyDate = unix_timestamp(now()),
+			<if test="powerbitemplateid != null">
+				PowerBITemplateID = #{powerbitemplateid,jdbcType=INTEGER},
+			</if>
+			<if test="tilesprotemplateid != null">
+				TilesProTemplateID = #{tilesprotemplateid,jdbcType=INTEGER},
+			</if>
+			<if test="comment != null">
+				Comment = #{comment,jdbcType=VARCHAR},
+			</if>
+			<if test="reporttype != null">
+				ReportType = #{reporttypeid,jdbcType=INTEGER},
+			</if>
+			<if test="duedate != null">
+				DueDate = #{duedate,jdbcType=BIGINT},
+			</if>
+			<if test="format != null">
+				Format = #{formatid,jdbcType=INTEGER},
+			</if>
+		</set>
+		where ReportID = #{reportid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.Report">
+		update Report
+		set UserID = #{userid,jdbcType=INTEGER},
+		Name = #{name,jdbcType=VARCHAR},
+		ProjectID = #{projectid,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+		PowerBITemplateID = #{powerbitemplateid,jdbcType=INTEGER},
+		TilesProTemplateID = #{tilesprotemplateid,jdbcType=INTEGER},
+		Comment = #{comment,jdbcType=VARCHAR},
+		ReportType = #{reporttype,jdbcType=VARCHAR},
+		DueDate = #{duedate,jdbcType=BIGINT},
+		Format = #{format,jdbcType=VARCHAR}
+		where ReportID = #{reportid,jdbcType=INTEGER}
+	</update>
+
+	<select id="getReportByProjectID" parameterType="java.lang.Integer"
+		resultType="map">
+		SELECT Report.ReportID AS reportID,
+			Name AS name,
+       		Report.UserID AS userid,
+      		rtype.ReportTypeID AS reportTypeID,
+       		rtype.ReportType AS reportType,
+       		fm.FormatID AS formatID,fm.FormatType AS format,
+       		brief.UserID AS briefUserID,
+      		Report.`Comment` AS `comment`,
+       		Report.ProjectID AS briefID,
+       		temp1.TemplateID AS reportTempID,
+       		temp1.TemplateName AS reportTempName,
+       		temp1.FileUrl AS reportUrl,
+       		temp2.TemplateID AS powerBITempID,
+       		temp2.TemplateName AS powerBITempName,
+       		temp2.FileUrl AS powerBIUrl,
+       		file.ReportFileUrl AS reportFileUrl
+       FROM Report LEFT JOIN ReportType rtype ON Report.ReportType=rtype.ReportTypeID
+       LEFT JOIN Template temp1 ON Report.TilesProTemplateID=temp1.TemplateID
+       LEFT JOIN Template temp2 ON Report.PowerBITemplateID=temp2.TemplateID
+       LEFT JOIN `Format` fm on Report.Format=fm.FormatID
+       LEFT JOIN ProjectBrief brief on Report.ProjectID=brief.ProjectBriefID 
+        OR Report.ProjectID=brief.ParentID
+       LEFT JOIN ReportFile file ON file.ReportID=Report.ReportID
+       WHERE brief.Status>0 AND Report.ProjectID=#{projectID, jdbcType=INTEGER}
+	</select>
+
+	<update id="updateProjectBriefStatus" parameterType="java.lang.Integer">
+		UPDATE ProjectBrief SET Status = 4,LastModifyDate=unix_timestamp(now()),
+  		 	   LastOperatorDate=unix_timestamp(now())
+		WHERE (ProjectBriefID = #{projectID, jdbcType=INTEGER} 
+			OR ParentID = #{projectID, jdbcType=INTEGER})
+		AND Status > 0
+	</update>
+
+	<update id="updateProjectProposalStatus" parameterType="java.lang.Integer">
+		UPDATE ProjectProposal SET Status = 4,LastModifyDate=unix_timestamp(now()),
+  		       LastOperatorDate=unix_timestamp(now())
+		WHERE (ProjectProposalID = #{projectID, jdbcType=INTEGER} OR ParentID = #{projectID, jdbcType=INTEGER})
+		AND Status > 0
+	</update>
+
+	<parameterMap id="rejectReportMap" type="java.util.Map">
+		<parameter property="projectID" jdbcType="INTEGER" mode="IN" />
+		<parameter property="comment" jdbcType="VARCHAR" mode="IN" />
+	</parameterMap>
+	<select id="rejectReport" parameterMap="rejectReportMap"
+		resultType="java.lang.Integer" statementType="CALLABLE">
+		{
+		CALL RejectReport(?,?)
+		}
+	</select>
+
+	<select id="completeReport" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer" statementType="CALLABLE">
+		{
+		CALL CompleteReport(
+		#{reportID, jdbcType=INTEGER}
+		)
+		}
+	</select>
+	
+	<delete id="deleteReport" parameterType="java.lang.Integer">
+		DELETE FROM Report
+		WHERE ReportID = #{reportID, jdbcType=INTEGER}
+	</delete>
+</mapper>

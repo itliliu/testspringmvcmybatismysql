@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.RoleMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.Role">
+		<id column="RoleID" property="roleid" jdbcType="INTEGER" />
+		<result column="RoleName" property="rolename" jdbcType="VARCHAR" />
+		<result column="Permission" property="permission" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RoleID, RoleName, Permission, Status, InsertDate, LastModifyDate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from Role
+		where RoleID = #{roleid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from Role
+		where RoleID = #{roleid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.Role">
+		insert into Role (RoleID, RoleName, Permission,
+		Status, InsertDate, LastModifyDate
+		)
+		values (#{roleid,jdbcType=INTEGER}, #{rolename,jdbcType=VARCHAR},
+		#{permission,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{insertdate,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=BIGINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.Role">
+		insert into Role
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="roleid != null">
+				RoleID,
+			</if>
+			<if test="rolename != null">
+				RoleName,
+			</if>
+			<if test="permission != null">
+				Permission,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="roleid != null">
+				#{roleid,jdbcType=INTEGER},
+			</if>
+			<if test="rolename != null">
+				#{rolename,jdbcType=VARCHAR},
+			</if>
+			<if test="permission != null">
+				#{permission,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.Role">
+		update Role
+		<set>
+			<if test="rolename != null">
+				RoleName = #{rolename,jdbcType=VARCHAR},
+			</if>
+			<if test="permission != null">
+				Permission = #{permission,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where RoleID = #{roleid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.Role">
+		update Role
+		set RoleName = #{rolename,jdbcType=VARCHAR},
+		Permission = #{permission,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+		where RoleID = #{roleid,jdbcType=INTEGER}
+	</update>
+
+	<!-- Project SQL -->
+	<select id="getRoleByNameOrEmail" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		SELECT
+		role.RoleID, role.RoleName, role.Permission, role.Status, role.InsertDate,
+		role.LastModifyDate
+		FROM Role role
+		LEFT JOIN User user
+		ON user.RoleID = role.RoleID
+		WHERE user.UserName = #{username,jdbcType=VARCHAR} OR user.Email =
+		#{username,jdbcType=VARCHAR}
+	</select>
+</mapper>

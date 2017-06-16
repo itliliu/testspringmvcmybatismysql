@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.RequestFormMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.RequestForm">
+		<id column="RequestFormID" property="requestformid" jdbcType="INTEGER" />
+		<result column="ContentSearchCategory" property="contentsearchcategory"
+			jdbcType="VARCHAR" />
+		<result column="KeyMessage1" property="keymessage1" jdbcType="VARCHAR" />
+		<result column="KeyMessage2" property="keymessage2" jdbcType="VARCHAR" />
+		<result column="KeyMessage3" property="keymessage3" jdbcType="VARCHAR" />
+		<result column="KeyMessage4" property="keymessage4" jdbcType="VARCHAR" />
+		<result column="KeyMessage5" property="keymessage5" jdbcType="VARCHAR" />
+		<result column="QualifyingEntities" property="qualifyingentities"
+			jdbcType="VARCHAR" />
+		<result column="SentimentEntities" property="sentimententities"
+			jdbcType="VARCHAR" />
+		<result column="Outlets" property="outlets" jdbcType="VARCHAR" />
+		<result column="QualifyingThreshold" property="qualifyingthreshold"
+			jdbcType="INTEGER" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="Version" property="version" jdbcType="INTEGER" />
+		<result column="ParentID" property="parentid" jdbcType="INTEGER" />
+		<result column="ProjectProposalID" property="projectproposalid"
+			jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+		<result column="Uid" property="uid" jdbcType="INTEGER" />
+		<result column="ClientID" property="clientid" jdbcType="INTEGER" />
+		<result column="ProjectBriefID" property="projectbriefid"
+			jdbcType="INTEGER" />
+		<result column="LastOperatorDate" property="lastoperatordate"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		RequestFormID, ContentSearchCategory, KeyMessage1, KeyMessage2, KeyMessage3,
+		KeyMessage4,
+		KeyMessage5, QualifyingEntities, SentimentEntities, Outlets, QualifyingThreshold,
+		Status, Version, ParentID, ProjectProposalID, InsertDate,
+		LastModifyDate, Uid, ClientID,
+		ProjectBriefID, LastOperatorDate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from RequestForm
+		where RequestFormID = #{requestformid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from RequestForm
+		where RequestFormID = #{requestformid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.RequestForm">
+		insert into RequestForm (RequestFormID, ContentSearchCategory,
+		KeyMessage1, KeyMessage2, KeyMessage3,
+		KeyMessage4, KeyMessage5, QualifyingEntities,
+		SentimentEntities, Outlets, QualifyingThreshold,
+		Status, Version, ParentID,
+		ProjectProposalID, InsertDate, LastModifyDate,
+		Uid, ClientID, ProjectBriefID,
+		LastOperatorDate)
+		values (#{requestformid,jdbcType=INTEGER},
+		#{contentsearchcategory,jdbcType=VARCHAR},
+		#{keymessage1,jdbcType=VARCHAR}, #{keymessage2,jdbcType=VARCHAR},
+		#{keymessage3,jdbcType=VARCHAR},
+		#{keymessage4,jdbcType=VARCHAR}, #{keymessage5,jdbcType=VARCHAR},
+		#{qualifyingentities,jdbcType=VARCHAR},
+		#{sentimententities,jdbcType=VARCHAR}, #{outlets,jdbcType=VARCHAR},
+		#{qualifyingthreshold,jdbcType=INTEGER},
+		#{status,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, #{parentid,jdbcType=INTEGER},
+		#{projectproposalid,jdbcType=INTEGER}, #{insertdate,jdbcType=BIGINT},
+		#{lastmodifydate,jdbcType=BIGINT},
+		#{uid,jdbcType=INTEGER}, #{clientid,jdbcType=INTEGER}, #{projectbriefid,jdbcType=INTEGER},
+		#{lastoperatordate,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.RequestForm">
+		insert into RequestForm
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="requestformid != null">
+				RequestFormID,
+			</if>
+			<if test="contentsearchcategory != null">
+				ContentSearchCategory,
+			</if>
+			<if test="keymessage1 != null">
+				KeyMessage1,
+			</if>
+			<if test="keymessage2 != null">
+				KeyMessage2,
+			</if>
+			<if test="keymessage3 != null">
+				KeyMessage3,
+			</if>
+			<if test="keymessage4 != null">
+				KeyMessage4,
+			</if>
+			<if test="keymessage5 != null">
+				KeyMessage5,
+			</if>
+			<if test="qualifyingentities != null">
+				QualifyingEntities,
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities,
+			</if>
+			<if test="outlets != null">
+				Outlets,
+			</if>
+			<if test="qualifyingthreshold != null">
+				QualifyingThreshold,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="version != null">
+				Version,
+			</if>
+			<if test="parentid != null">
+				ParentID,
+			</if>
+			<if test="projectproposalid != null">
+				ProjectProposalID,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+			<if test="uid != null">
+				Uid,
+			</if>
+			<if test="clientid != null">
+				ClientID,
+			</if>
+			<if test="projectbriefid != null">
+				ProjectBriefID,
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="requestformid != null">
+				#{requestformid,jdbcType=INTEGER},
+			</if>
+			<if test="contentsearchcategory != null">
+				#{contentsearchcategory,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage1 != null">
+				#{keymessage1,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage2 != null">
+				#{keymessage2,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage3 != null">
+				#{keymessage3,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage4 != null">
+				#{keymessage4,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage5 != null">
+				#{keymessage5,jdbcType=VARCHAR},
+			</if>
+			<if test="qualifyingentities != null">
+				#{qualifyingentities,jdbcType=VARCHAR},
+			</if>
+			<if test="sentimententities != null">
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				#{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="qualifyingthreshold != null">
+				#{qualifyingthreshold,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="projectproposalid != null">
+				#{projectproposalid,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="projectbriefid != null">
+				#{projectbriefid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				#{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.RequestForm">
+		update RequestForm
+		<set>
+			<if test="contentsearchcategory != null">
+				ContentSearchCategory = #{contentsearchcategory,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage1 != null">
+				KeyMessage1 = #{keymessage1,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage2 != null">
+				KeyMessage2 = #{keymessage2,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage3 != null">
+				KeyMessage3 = #{keymessage3,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage4 != null">
+				KeyMessage4 = #{keymessage4,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage5 != null">
+				KeyMessage5 = #{keymessage5,jdbcType=VARCHAR},
+			</if>
+			<if test="qualifyingentities != null">
+				QualifyingEntities = #{qualifyingentities,jdbcType=VARCHAR},
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities = #{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				Outlets = #{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="qualifyingthreshold != null">
+				QualifyingThreshold = #{qualifyingthreshold,jdbcType=INTEGER},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				Version = #{version,jdbcType=INTEGER},
+			</if>
+			<if test="parentid != null">
+				ParentID = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="projectproposalid != null">
+				ProjectProposalID = #{projectproposalid,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="uid != null">
+				Uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="projectbriefid != null">
+				ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where RequestFormID = #{requestformid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.RequestForm">
+		update RequestForm
+		set ContentSearchCategory = #{contentsearchcategory,jdbcType=VARCHAR},
+		KeyMessage1 = #{keymessage1,jdbcType=VARCHAR},
+		KeyMessage2 = #{keymessage2,jdbcType=VARCHAR},
+		KeyMessage3 = #{keymessage3,jdbcType=VARCHAR},
+		KeyMessage4 = #{keymessage4,jdbcType=VARCHAR},
+		KeyMessage5 = #{keymessage5,jdbcType=VARCHAR},
+		QualifyingEntities = #{qualifyingentities,jdbcType=VARCHAR},
+		SentimentEntities = #{sentimententities,jdbcType=VARCHAR},
+		Outlets = #{outlets,jdbcType=VARCHAR},
+		QualifyingThreshold = #{qualifyingthreshold,jdbcType=INTEGER},
+		Status = #{status,jdbcType=INTEGER},
+		Version = #{version,jdbcType=INTEGER},
+		ParentID = #{parentid,jdbcType=INTEGER},
+		ProjectProposalID = #{projectproposalid,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+		Uid = #{uid,jdbcType=INTEGER},
+		ClientID = #{clientid,jdbcType=INTEGER},
+		ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+		LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT}
+		where RequestFormID = #{requestformid,jdbcType=INTEGER}
+	</update>
+</mapper>

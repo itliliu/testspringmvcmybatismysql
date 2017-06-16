@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ProjectFileMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.ProjectFile">
+		<id column="ProjectFileID" property="projectfileid" jdbcType="INTEGER" />
+		<result column="ProjectBriefID" property="projectbriefid"
+			jdbcType="INTEGER" />
+		<result column="ProjectBriefFileUrl" property="projectbrieffileurl"
+			jdbcType="VARCHAR" />
+		<result column="ProjectProposalFileUrl" property="projectproposalfileurl"
+			jdbcType="VARCHAR" />
+		<result column="RequestFormFileUrl" property="requestformfileurl"
+			jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ProjectFileID, ProjectBriefID, ProjectBriefFileUrl, ProjectProposalFileUrl,
+		RequestFormFileUrl,
+		Status, InsertDate, LastModifyDate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from ProjectFile
+		where ProjectFileID = #{projectfileid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ProjectFile
+		where ProjectFileID = #{projectfileid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.ProjectFile">
+		insert into ProjectFile (ProjectFileID, ProjectBriefID,
+		ProjectBriefFileUrl,
+		ProjectProposalFileUrl, RequestFormFileUrl,
+		Status, InsertDate, LastModifyDate
+		)
+		values (#{projectfileid,jdbcType=INTEGER},
+		#{projectbriefid,jdbcType=INTEGER},
+		#{projectbrieffileurl,jdbcType=VARCHAR},
+		#{projectproposalfileurl,jdbcType=VARCHAR},
+		#{requestformfileurl,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{insertdate,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=BIGINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.ProjectFile">
+		insert into ProjectFile
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="projectfileid != null">
+				ProjectFileID,
+			</if>
+			<if test="projectbriefid != null">
+				ProjectBriefID,
+			</if>
+			<if test="projectbrieffileurl != null">
+				ProjectBriefFileUrl,
+			</if>
+			<if test="projectproposalfileurl != null">
+				ProjectProposalFileUrl,
+			</if>
+			<if test="requestformfileurl != null">
+				RequestFormFileUrl,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="projectfileid != null">
+				#{projectfileid,jdbcType=INTEGER},
+			</if>
+			<if test="projectbriefid != null">
+				#{projectbriefid,jdbcType=INTEGER},
+			</if>
+			<if test="projectbrieffileurl != null">
+				#{projectbrieffileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="projectproposalfileurl != null">
+				#{projectproposalfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="requestformfileurl != null">
+				#{requestformfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ProjectFile">
+		update ProjectFile
+		<set>
+			<if test="projectbriefid != null">
+				ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+			</if>
+			<if test="projectbrieffileurl != null">
+				ProjectBriefFileUrl = #{projectbrieffileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="projectproposalfileurl != null">
+				ProjectProposalFileUrl = #{projectproposalfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="requestformfileurl != null">
+				RequestFormFileUrl = #{requestformfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ProjectFileID = #{projectfileid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.ProjectFile">
+		update ProjectFile
+		set ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+		ProjectBriefFileUrl = #{projectbrieffileurl,jdbcType=VARCHAR},
+		ProjectProposalFileUrl = #{projectproposalfileurl,jdbcType=VARCHAR},
+		RequestFormFileUrl = #{requestformfileurl,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+		where ProjectFileID = #{projectfileid,jdbcType=INTEGER}
+	</update>
+</mapper>

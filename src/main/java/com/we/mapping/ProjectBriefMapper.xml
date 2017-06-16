@@ -1,0 +1,1105 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ProjectBriefMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.ProjectBriefResult">
+		<id column="ProjectBriefID" property="projectBriefID" jdbcType="INTEGER" />
+		<result column="ProjectBriefName" property="projectBriefName"
+			jdbcType="VARCHAR" />
+		<result column="ObjectGuidingPrinciple" property="objectGuidingPrinciple"
+			jdbcType="VARCHAR" />
+		<result column="CommunicationObjective" property="communicationObjective"
+			jdbcType="VARCHAR" />
+		<result column="BusinessObjective" property="businessObjective"
+			jdbcType="VARCHAR" />
+		<result column="Outcomes" property="outcomes" jdbcType="VARCHAR" />
+		<result column="Context" property="context" jdbcType="VARCHAR" />
+		<result column="TargetAudience" property="targetAudience"
+			jdbcType="VARCHAR" />
+		<result column="CreateInsporation" property="createInsporation"
+			jdbcType="VARCHAR" />
+		<result column="ProjectType" property="projectType" jdbcType="VARCHAR" />
+		<result column="ProjectLeads" property="projectLeads" jdbcType="VARCHAR" />
+		<result column="ProjectID" property="projectID" jdbcType="VARCHAR" />
+		<result column="Deliverable" property="deliverable" jdbcType="VARCHAR" />
+		<result column="ScheduleTimeline" property="scheduleTimeline"
+			jdbcType="VARCHAR" />
+		<result column="AnnouncementType" property="announcementType"
+			jdbcType="VARCHAR" />
+		<result column="KeyMessage" property="keyMessage" jdbcType="VARCHAR" />
+		<result column="AdditionalContent" property="additionalContent"
+			jdbcType="VARCHAR" />
+		<result column="USOnlyOrGlobalMetrics" property="usOnlyOrGolbalMetrics"
+			jdbcType="VARCHAR" />
+		<result column="SearchTerms" property="searchTerms" jdbcType="VARCHAR" />
+		<result column="AnyAdditionalData" property="anyAdditionalData"
+			jdbcType="VARCHAR" />
+		<result column="RequestedBy" property="requestedBy" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="Version" property="version" jdbcType="INTEGER" />
+		<result column="ParentID" property="parentID" jdbcType="INTEGER" />
+		<result column="UserID" property="userid" jdbcType="INTEGER" />
+		<result column="ClientID" property="clientID" jdbcType="INTEGER" />
+		<result column="IsNeedProposal" property="isNeedProposal" jdbcType="BIT" />
+		<result column="ProjectProposalID" property="projectProposalID" jdbcType="INTEGER" />
+		<result column="ProposalParentID" property="proposalParentID"
+			jdbcType="INTEGER" />		
+		<result column="ProjectProposalName" property="projectProposalName" jdbcType="VARCHAR" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ProjectBriefID, ProjectBriefName, ObjectGuidingPrinciple,
+		CommunicationObjective,BusinessObjective,
+		Outcomes, Context,
+		TargetAudience,
+		CreateInsporation, ProjectType,
+		ProjectLeads,
+		ProjectID,
+		Deliverable,
+		ScheduleTimeline, AnnouncementType, KeyMessage,
+		AdditionalContent,
+		USOnlyOrGlobalMetrics, SearchTerms,
+		AnyAdditionalData, RequestedBy, Status, Version,ParentID,
+		UserID,
+		ClientID
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ProjectBrief
+		WHERE (ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} 
+			OR ParentID= #{projectBriefID,jdbcType=INTEGER})
+			AND Status>0 LIMIT 1;
+	</select>
+	<update id="deleteByPrimaryKey" parameterType="com.we.bean.ProjectBrief">
+		UPDATE ProjectBrief SET Status=-2, LastModifyDate=unix_timestamp(now())
+		WHERE ProjectBriefID = #{projectBriefID,jdbcType=INTEGER}
+			AND #{userid,jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.we.bean.ProjectBrief">
+		insert into ProjectBrief
+		(ProjectBriefID, ProjectBriefName,
+		ObjectGuidingPrinciple,
+		CommunicationObjective,
+		Outcomes, Context, TargetAudience,
+		CreateInsporation, ProjectType, ProjectLeads,
+		ProjectID, Deliverable,
+		ScheduleTimeline,
+		AnnouncementType, KeyMessage, AdditionalContent,
+		USOnlyOrGlobalMetrics, SearchTerms, AnyAdditionalData,
+		StartDate,
+		EndDate, SentimentEntities,
+		Outlets, RequestedBy, Status,
+		Version,
+		InsertDate, LastModifyDate,
+		ParentID, Uid, ClientID,
+		LastOperatorDate)
+		values (#{projectBriefID,jdbcType=INTEGER},
+		#{projectbriefname,jdbcType=VARCHAR},
+		#{objectguidingprinciple,jdbcType=VARCHAR},
+		#{communicationobjective,jdbcType=VARCHAR},
+		#{outcomes,jdbcType=VARCHAR}, #{context,jdbcType=VARCHAR},
+		#{targetaudience,jdbcType=VARCHAR},
+		#{createinsporation,jdbcType=VARCHAR},
+		#{projecttype,jdbcType=VARCHAR}, #{projectleads,jdbcType=VARCHAR},
+		#{projectid,jdbcType=INTEGER}, #{deliverable,jdbcType=VARCHAR},
+		#{scheduletimeline,jdbcType=VARCHAR},
+		#{announcementtype,jdbcType=VARCHAR}, #{keymessage,jdbcType=VARCHAR},
+		#{additionalcontent,jdbcType=VARCHAR},
+		#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+		#{searchterms,jdbcType=VARCHAR},
+		#{anyadditionaldata,jdbcType=VARCHAR},
+		#{startdate,jdbcType=BIGINT},
+		#{enddate,jdbcType=BIGINT}, #{sentimententities,jdbcType=VARCHAR},
+		#{outlets,jdbcType=VARCHAR}, #{requestedby,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER},
+		#{version,jdbcType=INTEGER},
+		#{insertdate,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=BIGINT},
+		#{parentid,jdbcType=INTEGER}, #{uid,jdbcType=INTEGER},
+		#{clientid,jdbcType=INTEGER},
+		#{lastoperatordate,jdbcType=BIGINT})
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.ProjectBrief">
+		insert into ProjectBrief
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="projectBriefID != null">
+				ProjectBriefID,
+			</if>
+			<if test="projectbriefname != null">
+				ProjectBriefName,
+			</if>
+			<if test="objectguidingprinciple != null">
+				ObjectGuidingPrinciple,
+			</if>
+			<if test="communicationobjective != null">
+				CommunicationObjective,
+			</if>
+			<if test="outcomes != null">
+				Outcomes,
+			</if>
+			<if test="context != null">
+				Context,
+			</if>
+			<if test="targetaudience != null">
+				TargetAudience,
+			</if>
+			<if test="createinsporation != null">
+				CreateInsporation,
+			</if>
+			<if test="projecttype != null">
+				ProjectType,
+			</if>
+			<if test="projectleads != null">
+				ProjectLeads,
+			</if>
+			<if test="projectid != null">
+				ProjectID,
+			</if>
+			<if test="deliverable != null">
+				Deliverable,
+			</if>
+			<if test="scheduletimeline != null">
+				ScheduleTimeline,
+			</if>
+			<if test="announcementtype != null">
+				AnnouncementType,
+			</if>
+			<if test="keymessage != null">
+				KeyMessage,
+			</if>
+			<if test="additionalcontent != null">
+				AdditionalContent,
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				USOnlyOrGlobalMetrics,
+			</if>
+			<if test="searchterms != null">
+				SearchTerms,
+			</if>
+			<if test="anyadditionaldata != null">
+				AnyAdditionalData,
+			</if>
+			<if test="startdate != null">
+				StartDate,
+			</if>
+			<if test="enddate != null">
+				EndDate,
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities,
+			</if>
+			<if test="outlets != null">
+				Outlets,
+			</if>
+			<if test="requestedby != null">
+				RequestedBy,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="version != null">
+				Version,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+			<if test="parentid != null">
+				ParentID,
+			</if>
+			<if test="uid != null">
+				Uid,
+			</if>
+			<if test="clientid != null">
+				ClientID,
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="projectBriefID != null">
+				#{projectBriefID,jdbcType=INTEGER},
+			</if>
+			<if test="projectbriefname != null">
+				#{projectbriefname,jdbcType=VARCHAR},
+			</if>
+			<if test="objectguidingprinciple != null">
+				#{objectguidingprinciple,jdbcType=VARCHAR},
+			</if>
+			<if test="communicationobjective != null">
+				#{communicationobjective,jdbcType=VARCHAR},
+			</if>
+			<if test="outcomes != null">
+				#{outcomes,jdbcType=VARCHAR},
+			</if>
+			<if test="context != null">
+				#{context,jdbcType=VARCHAR},
+			</if>
+			<if test="targetaudience != null">
+				#{targetaudience,jdbcType=VARCHAR},
+			</if>
+			<if test="createinsporation != null">
+				#{createinsporation,jdbcType=VARCHAR},
+			</if>
+			<if test="projecttype != null">
+				#{projecttype,jdbcType=VARCHAR},
+			</if>
+			<if test="projectleads != null">
+				#{projectleads,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				#{projectid,jdbcType=INTEGER},
+			</if>
+			<if test="deliverable != null">
+				#{deliverable,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduletimeline != null">
+				#{scheduletimeline,jdbcType=VARCHAR},
+			</if>
+			<if test="announcementtype != null">
+				#{announcementtype,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage != null">
+				#{keymessage,jdbcType=VARCHAR},
+			</if>
+			<if test="additionalcontent != null">
+				#{additionalcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+			</if>
+			<if test="searchterms != null">
+				#{searchterms,jdbcType=VARCHAR},
+			</if>
+			<if test="anyadditionaldata != null">
+				#{anyadditionaldata,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=BIGINT},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=BIGINT},
+			</if>
+			<if test="sentimententities != null">
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				#{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="requestedby != null">
+				#{requestedby,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				#{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ProjectBrief">
+		update ProjectBrief
+		<set>
+			<if test="projectbriefname != null">
+				ProjectBriefName = #{projectbriefname,jdbcType=VARCHAR},
+			</if>
+			<if test="objectguidingprinciple != null">
+				ObjectGuidingPrinciple =
+				#{objectguidingprinciple,jdbcType=VARCHAR},
+			</if>
+			<if test="communicationobjective != null">
+				CommunicationObjective =
+				#{communicationobjective,jdbcType=VARCHAR},
+			</if>
+			<if test="outcomes != null">
+				Outcomes = #{outcomes,jdbcType=VARCHAR},
+			</if>
+			<if test="context != null">
+				Context = #{context,jdbcType=VARCHAR},
+			</if>
+			<if test="targetaudience != null">
+				TargetAudience = #{targetaudience,jdbcType=VARCHAR},
+			</if>
+			<if test="createinsporation != null">
+				CreateInsporation =
+				#{createinsporation,jdbcType=VARCHAR},
+			</if>
+			<if test="projecttype != null">
+				ProjectType = #{projecttype,jdbcType=VARCHAR},
+			</if>
+			<if test="projectleads != null">
+				ProjectLeads = #{projectleads,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				ProjectID = #{projectid,jdbcType=INTEGER},
+			</if>
+			<if test="deliverable != null">
+				Deliverable = #{deliverable,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduletimeline != null">
+				ScheduleTimeline = #{scheduletimeline,jdbcType=VARCHAR},
+			</if>
+			<if test="announcementtype != null">
+				AnnouncementType = #{announcementtype,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage != null">
+				KeyMessage = #{keymessage,jdbcType=VARCHAR},
+			</if>
+			<if test="additionalcontent != null">
+				AdditionalContent =
+				#{additionalcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				USOnlyOrGlobalMetrics =
+				#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+			</if>
+			<if test="searchterms != null">
+				SearchTerms = #{searchterms,jdbcType=VARCHAR},
+			</if>
+			<if test="anyadditionaldata != null">
+				AnyAdditionalData =
+				#{anyadditionaldata,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				StartDate = #{startdate,jdbcType=BIGINT},
+			</if>
+			<if test="enddate != null">
+				EndDate = #{enddate,jdbcType=BIGINT},
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities =
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				Outlets = #{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="requestedby != null">
+				RequestedBy = #{requestedby,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				Version = #{version,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				ParentID = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				Uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ProjectBriefID = #{projectBriefID,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.ProjectBrief">
+		update
+		ProjectBrief
+		set ProjectBriefName =
+		#{projectbriefname,jdbcType=VARCHAR},
+		ObjectGuidingPrinciple =
+		#{objectguidingprinciple,jdbcType=VARCHAR},
+		CommunicationObjective =
+		#{communicationobjective,jdbcType=VARCHAR},
+		Outcomes =
+		#{outcomes,jdbcType=VARCHAR},
+		Context = #{context,jdbcType=VARCHAR},
+		TargetAudience = #{targetaudience,jdbcType=VARCHAR},
+		CreateInsporation
+		= #{createinsporation,jdbcType=VARCHAR},
+		ProjectType =
+		#{projecttype,jdbcType=VARCHAR},
+		ProjectLeads =
+		#{projectleads,jdbcType=VARCHAR},
+		ProjectID =
+		#{projectid,jdbcType=INTEGER},
+		Deliverable =
+		#{deliverable,jdbcType=VARCHAR},
+		ScheduleTimeline =
+		#{scheduletimeline,jdbcType=VARCHAR},
+		AnnouncementType =
+		#{announcementtype,jdbcType=VARCHAR},
+		KeyMessage =
+		#{keymessage,jdbcType=VARCHAR},
+		AdditionalContent =
+		#{additionalcontent,jdbcType=VARCHAR},
+		USOnlyOrGlobalMetrics =
+		#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+		SearchTerms =
+		#{searchterms,jdbcType=VARCHAR},
+		AnyAdditionalData =
+		#{anyadditionaldata,jdbcType=VARCHAR},
+		StartDate =
+		#{startdate,jdbcType=BIGINT},
+		EndDate = #{enddate,jdbcType=BIGINT},
+		SentimentEntities = #{sentimententities,jdbcType=VARCHAR},
+		Outlets =
+		#{outlets,jdbcType=VARCHAR},
+		RequestedBy =
+		#{requestedby,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		Version = #{version,jdbcType=INTEGER},
+		InsertDate =
+		#{insertdate,jdbcType=BIGINT},
+		LastModifyDate =
+		#{lastmodifydate,jdbcType=BIGINT},
+		ParentID =
+		#{parentid,jdbcType=INTEGER},
+		Uid = #{uid,jdbcType=INTEGER},
+		ClientID =
+		#{clientid,jdbcType=INTEGER},
+		LastOperatorDate =
+		#{lastoperatordate,jdbcType=BIGINT}
+		where ProjectBriefID =
+		#{projectBriefID,jdbcType=INTEGER}
+	</update>
+
+	<sql id="Brief_Proposal_Column_List">
+		brief.ProjectBriefID, brief.ProjectBriefName,
+		brief.ObjectGuidingPrinciple,
+		brief.CommunicationObjective,brief.BusinessObjective,
+		brief.Outcomes,
+		brief.Context, brief.TargetAudience,
+		brief.CreateInsporation,
+		brief.ProjectType,
+		brief.ProjectLeads,
+		brief.ProjectID,
+		brief.Deliverable,
+		brief.ScheduleTimeline, brief.AnnouncementType,
+		brief.KeyMessage,
+		brief.AdditionalContent,
+		brief.USOnlyOrGlobalMetrics,
+		brief.SearchTerms, brief.AnyAdditionalData,
+		brief.RequestedBy, brief.Status, brief.Version,brief.ParentID,
+		brief.UserID,
+		brief.ClientID,proposal.ProjectProposalID,proposal.ParentID AS ProposalParentID
+	</sql>
+
+	<parameterMap id="getProjectBriefMap" type="java.util.Map">
+		<parameter property="briefID" jdbcType="INTEGER" mode="IN" />
+		<parameter property="userid" jdbcType="INTEGER" mode="IN" />
+	</parameterMap>
+	<select id="getProjectBriefByPrimaryKeyUIDAndClient" resultMap="BaseResultMap"
+		parameterMap="getProjectBriefMap">
+		{
+			CALL we_project.GetProjectBriefByUserIDAndPrimaryKey(
+				#{userid,jdbcType=INTEGER},
+				#{briefID,jdbcType=INTEGER}
+			)
+		}
+	</select>
+	<update id="updateProjectBriefToProposal" parameterType="java.lang.Integer">
+		UPDATE ProjectBrief SET Status=1
+		WHERE ProjectBriefID = #{projectbriefid,jdbcType=INTEGER}
+	</update>
+
+	<resultMap id="ReturnCode" type="java.lang.Integer">
+		<result column="returnCode" jdbcType="INTEGER" javaType="Integer" />
+	</resultMap>
+
+	<select id="saveProjectBrief" statementType="CALLABLE"
+		resultMap="ReturnCode" parameterType="com.we.bean.ProjectBriefResult">
+		{
+			CALL we_project.SaveProjectBrief(
+				#{projectBriefID,jdbcType=INTEGER},
+				#{projectBriefName,jdbcType=VARCHAR},
+				#{objectGuidingPrinciple,jdbcType=VARCHAR},
+				#{communicationObjective,jdbcType=VARCHAR},
+				#{businessObjective,jdbcType=VARCHAR},
+				#{outcomes,jdbcType=VARCHAR},
+				#{context,jdbcType=VARCHAR},
+				#{targetAudience,jdbcType=VARCHAR},
+				#{createInsporation,jdbcType=VARCHAR},
+				#{projectType,jdbcType=VARCHAR},
+				#{projectLeads,jdbcType=VARCHAR},
+				#{projectID,jdbcType=VARCHAR},
+				#{deliverable,jdbcType=VARCHAR},
+				#{scheduleTimeline,jdbcType=VARCHAR},
+				#{announcementType,jdbcType=VARCHAR},
+				#{keyMessage,jdbcType=VARCHAR},
+				#{additionalContent,jdbcType=VARCHAR},
+				#{usOnlyOrGolbalMetrics,jdbcType=VARCHAR},
+				#{searchTerms,jdbcType=VARCHAR},
+				#{anyAdditionalData,jdbcType=VARCHAR},
+				#{requestedBy,jdbcType=VARCHAR},
+				#{parentID,jdbcType=INTEGER},
+				#{userid,jdbcType=INTEGER},
+				#{clientID,jdbcType=INTEGER},
+				#{isNeedProposal,jdbcType=BIT}
+			)
+		}
+	</select>
+	<select id="submitProjectBrief" statementType="CALLABLE"
+		resultMap="ReturnCode" parameterType="com.we.bean.ProjectBriefResult">
+		{
+			CALL we_project.SubmitProjectBrief(
+				#{projectBriefID,jdbcType=INTEGER},
+				#{projectBriefName,jdbcType=VARCHAR},
+				#{objectGuidingPrinciple,jdbcType=VARCHAR},
+				#{communicationObjective,jdbcType=VARCHAR},
+				#{businessObjective,jdbcType=VARCHAR},
+				#{outcomes,jdbcType=VARCHAR},
+				#{context,jdbcType=VARCHAR},
+				#{targetAudience,jdbcType=VARCHAR},
+				#{createInsporation,jdbcType=VARCHAR},
+				#{projectType,jdbcType=VARCHAR}, #{projectLeads,jdbcType=VARCHAR},
+				#{projectID,jdbcType=VARCHAR}, #{deliverable,jdbcType=VARCHAR},
+				#{scheduleTimeline,jdbcType=VARCHAR},
+				#{announcementType,jdbcType=VARCHAR}, #{keyMessage,jdbcType=VARCHAR},
+				#{additionalContent,jdbcType=VARCHAR},
+				#{usOnlyOrGolbalMetrics,jdbcType=VARCHAR},
+				#{searchTerms,jdbcType=VARCHAR},
+				#{anyAdditionalData,jdbcType=VARCHAR},
+				#{requestedBy,jdbcType=VARCHAR},
+				#{parentID,jdbcType=INTEGER},
+				#{userid,jdbcType=INTEGER},
+				#{clientID,jdbcType=INTEGER},
+				#{isNeedProposal,jdbcType=BIT},
+				#{status,jdbcType=INTEGER}
+			)
+		}
+	</select>
+
+	<resultMap id="pageNumber" type="java.lang.Integer">
+		<result column="total_page_number" jdbcType="INTEGER" javaType="Integer" />
+	</resultMap>
+
+	<resultMap id="ProjectConsoleMap" type="com.we.bean.ProjectConsole">
+		<result column="ProjectBriefID" property="projectBriefID"
+			jdbcType="INTEGER" javaType="Integer" />
+		<result column="ParentID" property="parentID" jdbcType="INTEGER"
+			javaType="Integer" />
+		<result column="Name" property="name" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="Status" property="status" jdbcType="INTEGER"
+			javaType="Integer" />
+		<result column="ClientName" property="clientName" jdbcType="VARCHAR"
+			javaType="String" />
+		<result column="UserID" property="userid" jdbcType="INTEGER"
+			javaType="Integer" />
+		<result column="Comment" property="comment" jdbcType="VARCHAR"
+			javaType="String" />
+	</resultMap>
+
+	<select id="getProjectListByStatusOrKeyword" statementType="CALLABLE"
+		resultMap="pageNumber,ProjectConsoleMap" parameterType="com.we.bean.ProjectParameter">
+		{
+			CALL we_project.GetProjectListByStatusOrKeyword(
+				#{userid,jdbcType=INTEGER},
+				#{status,jdbcType=INTEGER},
+				#{clientID,jdbcType=INTEGER},
+				#{keyword,jdbcType=VARCHAR},
+				#{pageIndex,jdbcType=INTEGER},
+				#{pageSize,jdbcType=INTEGER}
+			)
+		}
+	</select>
+	<select id="getRecentProject" resultType="map" parameterType="map"
+		statementType="CALLABLE">
+		{
+			CALL GetRecentProject(
+				#{userid, jdbcType=INTEGER},
+				#{clientid, jdbcType=INTEGER}
+			)
+		}
+	</select>
+	
+	<parameterMap id="updateOperatorDateMap" type="java.util.Map">
+		<parameter property="parentID" jdbcType="INTEGER" mode="IN" />
+		<parameter property="userID" jdbcType="INTEGER" mode="IN" />
+	</parameterMap>
+	<select id="updateLastOperatorDate" statementType="CALLABLE" resultMap="ReturnCode"
+		parameterMap="updateOperatorDateMap">
+		{
+			CALL we_project.UpdateLastOperatorDate(
+				#{userid,jdbcType=INTEGER},
+				#{parentID,jdbcType=INTEGER}
+			)
+		}
+	</select>
+	<update id="updateProjectBriefDate" parameterType="java.lang.Integer">
+		UPDATE ProjectBrief 
+		SET LastOperatorDate=unix_timestamp(now()),
+			LastModifyDate=unix_timestamp(now())
+		WHERE ProjectBriefID=#{projectBriefID,jdbcType=INTEGER}
+			OR ParentID=#{projectBriefID,jdbcType=INTEGER} AND Status>=0
+	</update>
+	<select id="getProjectBriefCountByClientID" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+	SELECT COUNT(ProjectBriefID) 
+	FROM ProjectBrief
+	WHERE ClientID=#{clientID, jdbcType=INTEGER} AND (Status!=5 AND Status>=0)
+	</select>
+	
+	<insert id="save" parameterType="com.we.bean.ProjectBrief">
+		insert into ProjectBrief
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="projectBriefID != null">
+				ProjectBriefID,
+			</if>
+			<if test="projectbriefname != null">
+				ProjectBriefName,
+			</if>
+			<if test="objectguidingprinciple != null">
+				ObjectGuidingPrinciple,
+			</if>
+			<if test="communicationobjective != null">
+				CommunicationObjective,
+			</if>
+			<if test="outcomes != null">
+				Outcomes,
+			</if>
+			<if test="context != null">
+				Context,
+			</if>
+			<if test="targetaudience != null">
+				TargetAudience,
+			</if>
+			<if test="createinsporation != null">
+				CreateInsporation,
+			</if>
+			<if test="projecttype != null">
+				ProjectType,
+			</if>
+			<if test="projectleads != null">
+				ProjectLeads,
+			</if>
+			<if test="projectid != null">
+				ProjectID,
+			</if>
+			<if test="deliverable != null">
+				Deliverable,
+			</if>
+			<if test="scheduletimeline != null">
+				ScheduleTimeline,
+			</if>
+			<if test="announcementtype != null">
+				AnnouncementType,
+			</if>
+			<if test="keymessage != null">
+				KeyMessage,
+			</if>
+			<if test="additionalcontent != null">
+				AdditionalContent,
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				USOnlyOrGlobalMetrics,
+			</if>
+			<if test="searchterms != null">
+				SearchTerms,
+			</if>
+			<if test="anyadditionaldata != null">
+				AnyAdditionalData,
+			</if>
+			<if test="startdate != null">
+				StartDate,
+			</if>
+			<if test="enddate != null">
+				EndDate,
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities,
+			</if>
+			<if test="outlets != null">
+				Outlets,
+			</if>
+			<if test="requestedby != null">
+				RequestedBy,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="version != null">
+				Version,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+			<if test="parentid != null">
+				ParentID,
+			</if>
+			<if test="uid != null">
+				Uid,
+			</if>
+			<if test="clientid != null">
+				ClientID,
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="projectBriefID != null">
+				#{projectBriefID,jdbcType=INTEGER},
+			</if>
+			<if test="projectbriefname != null">
+				#{projectbriefname,jdbcType=VARCHAR},
+			</if>
+			<if test="objectguidingprinciple != null">
+				#{objectguidingprinciple,jdbcType=VARCHAR},
+			</if>
+			<if test="communicationobjective != null">
+				#{communicationobjective,jdbcType=VARCHAR},
+			</if>
+			<if test="outcomes != null">
+				#{outcomes,jdbcType=VARCHAR},
+			</if>
+			<if test="context != null">
+				#{context,jdbcType=VARCHAR},
+			</if>
+			<if test="targetaudience != null">
+				#{targetaudience,jdbcType=VARCHAR},
+			</if>
+			<if test="createinsporation != null">
+				#{createinsporation,jdbcType=VARCHAR},
+			</if>
+			<if test="projecttype != null">
+				#{projecttype,jdbcType=VARCHAR},
+			</if>
+			<if test="projectleads != null">
+				#{projectleads,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				#{projectid,jdbcType=INTEGER},
+			</if>
+			<if test="deliverable != null">
+				#{deliverable,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduletimeline != null">
+				#{scheduletimeline,jdbcType=VARCHAR},
+			</if>
+			<if test="announcementtype != null">
+				#{announcementtype,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage != null">
+				#{keymessage,jdbcType=VARCHAR},
+			</if>
+			<if test="additionalcontent != null">
+				#{additionalcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+			</if>
+			<if test="searchterms != null">
+				#{searchterms,jdbcType=VARCHAR},
+			</if>
+			<if test="anyadditionaldata != null">
+				#{anyadditionaldata,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				#{startdate,jdbcType=BIGINT},
+			</if>
+			<if test="enddate != null">
+				#{enddate,jdbcType=BIGINT},
+			</if>
+			<if test="sentimententities != null">
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				#{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="requestedby != null">
+				#{requestedby,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				#{version,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				#{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				#{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				#{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				#{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+
+<!-- 	int submit(ProjectBrief biref) throws SQLException; -->
+	<update id="submit" parameterType="com.we.bean.ProjectBrief">
+		update ProjectBrief
+		<set>
+			<if test="projectbriefname != null">
+				ProjectBriefName = #{projectbriefname,jdbcType=VARCHAR},
+			</if>
+			<if test="objectguidingprinciple != null">
+				ObjectGuidingPrinciple =
+				#{objectguidingprinciple,jdbcType=VARCHAR},
+			</if>
+			<if test="communicationobjective != null">
+				CommunicationObjective =
+				#{communicationobjective,jdbcType=VARCHAR},
+			</if>
+			<if test="outcomes != null">
+				Outcomes = #{outcomes,jdbcType=VARCHAR},
+			</if>
+			<if test="context != null">
+				Context = #{context,jdbcType=VARCHAR},
+			</if>
+			<if test="targetaudience != null">
+				TargetAudience = #{targetaudience,jdbcType=VARCHAR},
+			</if>
+			<if test="createinsporation != null">
+				CreateInsporation =
+				#{createinsporation,jdbcType=VARCHAR},
+			</if>
+			<if test="projecttype != null">
+				ProjectType = #{projecttype,jdbcType=VARCHAR},
+			</if>
+			<if test="projectleads != null">
+				ProjectLeads = #{projectleads,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				ProjectID = #{projectid,jdbcType=INTEGER},
+			</if>
+			<if test="deliverable != null">
+				Deliverable = #{deliverable,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduletimeline != null">
+				ScheduleTimeline = #{scheduletimeline,jdbcType=VARCHAR},
+			</if>
+			<if test="announcementtype != null">
+				AnnouncementType = #{announcementtype,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage != null">
+				KeyMessage = #{keymessage,jdbcType=VARCHAR},
+			</if>
+			<if test="additionalcontent != null">
+				AdditionalContent =
+				#{additionalcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				USOnlyOrGlobalMetrics =
+				#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+			</if>
+			<if test="searchterms != null">
+				SearchTerms = #{searchterms,jdbcType=VARCHAR},
+			</if>
+			<if test="anyadditionaldata != null">
+				AnyAdditionalData =
+				#{anyadditionaldata,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				StartDate = #{startdate,jdbcType=BIGINT},
+			</if>
+			<if test="enddate != null">
+				EndDate = #{enddate,jdbcType=BIGINT},
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities =
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				Outlets = #{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="requestedby != null">
+				RequestedBy = #{requestedby,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				Version = #{version,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				ParentID = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				Uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ProjectBriefID = #{projectBriefID,jdbcType=INTEGER}
+	</update>
+	
+<!-- 	List<ProjectBrief> listDetailInfo(ProjectBrief biref) throws SQLException; -->
+	<select id="listDetailInfo" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ProjectBrief
+		WHERE (ProjectBriefID = #{projectBriefID,jdbcType=INTEGER}  ;
+	</select>
+
+<!-- modifyBrief -->
+	<update id="modifyBrief" parameterType="com.we.bean.ProjectBrief">
+		update ProjectBrief
+		<set>
+			<if test="projectbriefname != null">
+				ProjectBriefName = #{projectbriefname,jdbcType=VARCHAR},
+			</if>
+			<if test="objectguidingprinciple != null">
+				ObjectGuidingPrinciple =
+				#{objectguidingprinciple,jdbcType=VARCHAR},
+			</if>
+			<if test="communicationobjective != null">
+				CommunicationObjective =
+				#{communicationobjective,jdbcType=VARCHAR},
+			</if>
+			<if test="outcomes != null">
+				Outcomes = #{outcomes,jdbcType=VARCHAR},
+			</if>
+			<if test="context != null">
+				Context = #{context,jdbcType=VARCHAR},
+			</if>
+			<if test="targetaudience != null">
+				TargetAudience = #{targetaudience,jdbcType=VARCHAR},
+			</if>
+			<if test="createinsporation != null">
+				CreateInsporation =
+				#{createinsporation,jdbcType=VARCHAR},
+			</if>
+			<if test="projecttype != null">
+				ProjectType = #{projecttype,jdbcType=VARCHAR},
+			</if>
+			<if test="projectleads != null">
+				ProjectLeads = #{projectleads,jdbcType=VARCHAR},
+			</if>
+			<if test="projectid != null">
+				ProjectID = #{projectid,jdbcType=INTEGER},
+			</if>
+			<if test="deliverable != null">
+				Deliverable = #{deliverable,jdbcType=VARCHAR},
+			</if>
+			<if test="scheduletimeline != null">
+				ScheduleTimeline = #{scheduletimeline,jdbcType=VARCHAR},
+			</if>
+			<if test="announcementtype != null">
+				AnnouncementType = #{announcementtype,jdbcType=VARCHAR},
+			</if>
+			<if test="keymessage != null">
+				KeyMessage = #{keymessage,jdbcType=VARCHAR},
+			</if>
+			<if test="additionalcontent != null">
+				AdditionalContent =
+				#{additionalcontent,jdbcType=VARCHAR},
+			</if>
+			<if test="usonlyorglobalmetrics != null">
+				USOnlyOrGlobalMetrics =
+				#{usonlyorglobalmetrics,jdbcType=VARCHAR},
+			</if>
+			<if test="searchterms != null">
+				SearchTerms = #{searchterms,jdbcType=VARCHAR},
+			</if>
+			<if test="anyadditionaldata != null">
+				AnyAdditionalData =
+				#{anyadditionaldata,jdbcType=VARCHAR},
+			</if>
+			<if test="startdate != null">
+				StartDate = #{startdate,jdbcType=BIGINT},
+			</if>
+			<if test="enddate != null">
+				EndDate = #{enddate,jdbcType=BIGINT},
+			</if>
+			<if test="sentimententities != null">
+				SentimentEntities =
+				#{sentimententities,jdbcType=VARCHAR},
+			</if>
+			<if test="outlets != null">
+				Outlets = #{outlets,jdbcType=VARCHAR},
+			</if>
+			<if test="requestedby != null">
+				RequestedBy = #{requestedby,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="version != null">
+				Version = #{version,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+			<if test="parentid != null">
+				ParentID = #{parentid,jdbcType=INTEGER},
+			</if>
+			<if test="uid != null">
+				Uid = #{uid,jdbcType=INTEGER},
+			</if>
+			<if test="clientid != null">
+				ClientID = #{clientid,jdbcType=INTEGER},
+			</if>
+			<if test="lastoperatordate != null">
+				LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ProjectBriefID = #{projectBriefID,jdbcType=INTEGER}
+	</update>
+
+<!-- 	ProjectBrief getBriefDetail(int projectBriefID) throws SQLException; -->
+	<select id="getBriefDetail" resultType="com.we.bean.ProjectBrief"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM ProjectBrief
+		WHERE (ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} 
+			 LIMIT 1;
+	</select>
+	
+<!-- 	deleteReceivedReports -->
+	<delete id="deleteReceivedReports" parameterType="java.lang.Integer">
+		delete
+		FROM ProjectBrief
+		WHERE projectBriefID=#{projectBriefID, jdbcType=INTEGER} 
+	</delete>
+</mapper>

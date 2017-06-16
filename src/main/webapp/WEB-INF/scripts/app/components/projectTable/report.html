@@ -1,0 +1,56 @@
+<div class="project-content-table">
+<table>
+	<thead>
+		<th>#</th>
+		<th>Report Name</th>
+		<th>Report Type</th>
+		<th>Format</th>
+		<th>Report Template</th>
+		<th>Power BI Template</th>
+		<th ng-show="canEdit"></th>
+	</thead>
+	<tr ng-repeat="item in data | filter:{'operator':'!delete'} track by $index">
+		<td>{{$index + 1}}</td>
+		<td>
+			<span ng-show="!canEdit">{{item.name}}</span>
+			<input class="form-control" ng-show='canEdit' ng-model='item.name' value="{{item.name}}">
+		</td>
+		<td>
+			<span ng-show="!canEdit">{{item.reportType}}</span>
+			<select class="form-control" ng-show="canEdit" ng-model="item.reporttype" ng-options="type.reporttype for type in reportTypeList" ng-change="getReportTemplate({ 'request': item})">
+			</select>
+		</td>
+		
+		<td>
+			<span ng-show="!canEdit">{{item.format}}</span>
+			<select class="form-control" ng-show="canEdit" ng-model="item.formattype" ng-options="format.formattype for format in formatList" ng-change="getReportTemplate({ 'request': item})">
+			</select>
+		</td>
+		<td>
+			<div class="btn-group">
+			    <span ng-show="!canEdit">
+			    	<a ng-href="{{item.templateDownload}}">
+			    		{{item.reportTempName}}
+			    	</a>
+			    	<a class="btn btn-default" ng-href="{{item.reportPreviewUrl}}" target="_blank">Preview</a>
+			    </span>
+			    <select class="form-control" ng-model="item.selectedTemplate" ng-show="canEdit" 
+			    ng-options="template.reportTempName for template in item.templateList track by template.reportTempID">
+			    </select>
+			</div>
+		</td>
+		<td>
+			<div class="btn-group">
+			    <span ng-show="!canEdit">
+			    	<a ng-href="{{item.prowerBIDownload}}">{{item.powerBITempName}}</a>
+			    </span>
+			    <span ng-bind="item.selectedTemplate.powerBITempName" ng-show="canEdit"></span>
+			</div>
+		</td>
+		<td ng-show="canEdit">
+			<a ng-click="addRequest()" ng-show='$last'><i class=" fa fa-plus"></i></a>
+			<a ng-click="deleteRequest({'request':item,'index':$index})" ng-hide="$last && $first"><i class=" fa fa-trash"></i></a>
+		 </td>
+	</tr>
+</table>
+</div>

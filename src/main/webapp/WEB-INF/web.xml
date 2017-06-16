@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<display-name>Archetype Created Web Application</display-name>
+	
+	<session-config>
+  		<session-timeout>1</session-timeout>
+ 	</session-config>
+ 
+	<context-param>
+        <param-name>authority</param-name>
+        <param-value>https://login.microsoftonline.com/</param-value>
+    </context-param>
+    <context-param>
+        <param-name>tenant</param-name>
+        <param-value>zhonghongcloudbridgepro.onmicrosoft.com</param-value>
+    </context-param>
+	
+	<!-- Spring and mybatis's configuration file -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:spring-mybatis.xml
+		</param-value>
+	</context-param>
+	
+<!-- 	JNDI lookup for name [spring.liveBeansView.mbeanDomain] threw NamingExceptio -->
+    <context-param>  
+        <param-name>spring.profiles.active</param-name>  
+        <param-value>dev</param-value>  
+    </context-param>  
+    <context-param>  
+        <param-name>spring.profiles.default</param-name>  
+        <param-value>dev</param-value>  
+    </context-param>  
+    <context-param>  
+        <param-name>spring.liveBeansView.mbeanDomain</param-name>  
+        <param-value>dev</param-value>  
+    </context-param>  
+
+	<!-- encoding filter -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<filter>
+		<filter-name>CORSFilter</filter-name>
+		<filter-class>com.we.tool.CORSFilter</filter-class>
+		<async-supported>true</async-supported>
+		<init-param>
+            <param-name>client_id</param-name>
+            <param-value>f63d3142-ac84-4e78-9c6d-9add635dc973</param-value>
+        </init-param>
+        <init-param>
+            <param-name>secret_key</param-name>
+            <param-value>zkZ66KzVf6HICdXHAOvgiynalOIj7l0J877wcnqxwe4=</param-value>
+        </init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CORSFilter</filter-name>
+		<url-pattern>*.json</url-pattern>
+		<!-- <url-pattern>*.html</url-pattern> -->
+	</filter-mapping>
+
+	<!-- Spring monitor -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+
+	<!-- Spring Out of memory monitor -->
+	<listener>
+		<listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+	</listener>
+
+	<!-- Spring Security filter, must before than SpringMVC filter -->
+	<!-- 
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping> -->
+
+	<!-- SAML Error -->
+	<!-- <error-page> <exception-type>java.lang.Exception</exception-type> <location>/error.jsp</location> 
+		</error-page> -->
+
+	<!-- SpringMVC Servlet -->
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:spring-mvc.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<url-pattern>*.json</url-pattern>
+	</servlet-mapping>
+
+	<welcome-file-list>
+		<welcome-file>index</welcome-file>
+	</welcome-file-list>
+</web-app>

@@ -1,0 +1,154 @@
+/* login page  - header */
+#login-page header {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    height: 55px;
+    background-color: #000000;
+    z-index: 10;
+}
+#login-page .login-header {
+    width: 100%;
+    height: 55px;
+    padding: 0 10%;
+} 
+#login-page .login-header .website-logo {
+	display: inline-block;
+    margin-top: 5px;
+    width: 100px;
+    height: 40px;
+    background: url(../../images/logo.png) no-repeat;
+    background-size: 100%;
+}
+#login-page .login-header .register-btn {
+	display: inline-block;
+	float: right;
+	height: 50px;
+	border: none;
+	background: none;
+    line-height: 55px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;  
+}
+/* login page  - content */
+#login-page .content {
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    margin-top: 55px;
+    width: 100%;
+ 	background: #000000 url(../../images/login-background.jpg) no-repeat;
+ 	background-size: cover;
+    z-index: 2;
+    overflow: hidden;
+}
+#login-page .content .gray-layer {
+	position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #000000;
+    opacity: 0.5;
+    z-index: 3;
+    overflow: hidden;
+}
+#login-page .login-content {
+	position: relative;
+	width: 100%;
+	padding-top: 130px;
+	z-index: 4;
+    /*border-radius: 4px;*/
+}
+/* login form*/
+#login-page .login-content .white-layer {
+	position: absolute;
+    right: 9%;
+	width: 385px;
+	height: 350px;
+	border: 1px solid #cccccc;
+	background-color: white;
+	opacity: 0.6;
+	z-index: 5;
+    border-radius: 8px;
+}
+#login-page .login-content .loginform-header{
+    position: absolute;
+    right: 9%;
+    height:63px;
+   background-color:#4D9A0F;
+    width:385px;
+    /*opacity: 0.6;*/
+    z-index: 6;
+    border-radius: 8px 8px 0 0;
+}
+
+#login-page .login-content form {
+	position: absolute;
+    right: 9%;
+	width: 385px;
+    padding: 105px 18px;
+    z-index: 6;
+    margin: 0 auto;
+}
+#login-page .login-content .form-group{
+    margin-left: 25px;
+}
+#login-page .login-content .form-group label{
+   color:#F7921E;
+    font-size: 10px;
+    font-weight: 100;
+}
+#login-page .login-content input{
+    border-bottom:1px solid #F7921E; /* 下划线效果 */
+    border-top:0px;
+    border-left:0px;
+    border-right:0px;
+    line-height: 30px;
+    background-color:transparent; /* 背景色透明 */
+    width: 300px;
+}
+input::-webkit-input-placeholder{
+    color: #DEDEDC;
+
+}
+input:-moz-placeholder {
+    color: #DEDEDC;
+}
+input::-moz-placeholder {
+    color: #DEDEDC;
+}
+input:-ms-input-placeholder {
+    color: #DEDEDC;
+}
+#login-page .login-content form .form-control {
+    margin-bottom: 28px;
+    height: 45px;
+    font-size: 12px;
+    border: 0;
+}
+
+#login-page .login-content form .login-btn {
+    margin-left: 25px;
+	width:300px;
+	height: 35px;
+    margin-top: 15px;
+	background-color: #F7921E;
+    border-radius: 26px;
+}
+#login-page .login-content form .error-text {
+    display: inline;
+    margin: 0;
+    color: red;
+}
+#login-page .login-content form .forget-btn {
+    float: right;
+	border: none;
+	background: none;
+	text-align: right;
+	text-decoration: underline;
+}

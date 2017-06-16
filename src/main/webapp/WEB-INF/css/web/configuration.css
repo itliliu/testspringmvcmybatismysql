@@ -1,0 +1,78 @@
+
+/*global*/
+header.search-bar {
+    padding: 25px 20px;
+}
+header.search-bar .add-btn {
+	float: right;
+	border:none;
+	background-color: #f0f0f2;
+	color: #949494;
+}
+header.search-bar .add-btn .fa-plus {
+	font-size: 40px;
+}
+header  .input-control,  header  .select-control{
+ width:200px;display: inline;
+
+}
+
+.datalist-table>li {
+    width:100%;
+}
+
+.datalist-table .table-header li {
+    font-weight:bold;text-align: center;
+    line-height: 3em;
+    height: 3em;
+}
+.datalist-table .table-body ul {
+    border : 1px solid #bbb;
+    line-height: 3em;margin-bottom: 2px;
+    height: 3em;
+
+    background-color: #EDEDED
+}
+.datalist-table .table-body ul>li {
+    text-align: center;
+}
+.datalist-table > li>ul {
+    float:left;width:100%
+}
+
+.client-console .datalist-table > li>ul>li {
+    display: inline-block;
+    width:20%;
+}
+.user-console .datalist-table > li>ul>li {
+    display: inline-block;
+    width:14%;
+}
+.datalist-table > li>ul>li:first-child{
+    display: inline-block;
+    width:10%;
+}
+.datalist-table > li>ul>li:last-child {
+  
+        text-align: right;
+    padding-right: 15px;
+}
+.modal.modal-top-class .modal-dialog {
+    margin:200px auto; 
+}
+/*\global*/
+
+/*client*/
+.client-console > section {
+    margin: 0px 20px 15px;
+    padding: 15px 10px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+}
+.user-console > section {
+    margin: 0px 20px 15px;
+    padding: 15px 10px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+}
+/*\client*/

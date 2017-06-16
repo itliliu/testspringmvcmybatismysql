@@ -1,0 +1,265 @@
+/*header style*/
+#brief-list header {
+	padding: 25px 30px;
+}
+#brief-list header .switch-btn {
+	width: 80px;
+	height: 25px;
+	color: #fff;
+	font-size: 12px;
+	margin-right: 15px;
+	opacity: 0.6;
+}
+#brief-list header .switch-btn.active {
+	opacity: 1;
+}
+#brief-list  header .switch-btn.request {
+	background-color: #ffa726;
+	border: 1px solid #fb8c00;
+}
+#brief-list  header .switch-btn.generate {
+	background-color: #29b6f6;
+    border: 1px solid #039be5;
+}
+#brief-list  header .switch-btn.create {
+	background-color: #5c6bc0;
+    border: 1px solid #3949ab;
+}
+#brief-list  header .switch-btn.publish {
+	background-color: #2baf2b;
+    border: 1px solid #0a8f08;
+}
+#brief-list  header .switch-btn.closed {
+	background-color: #A8B6BE;
+    border: 1px solid #92A2AA;
+}
+#brief-list  header .switch-btn.all {
+	background-color: #666;
+    border: 1px solid #444;
+}
+#brief-list header .switch-btn.off {
+	opacity: 0.6;
+}
+#brief-list header .add-btn {
+	float: right;
+	border:none;
+	background-color: #f0f0f2;
+	color: #949494;
+}
+#brief-list header .add-btn .fa-plus {
+	font-size: 40px;
+}
+#brief-list header .search {
+	width: 25%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 12px;
+    text-indent: 4px;
+    padding-right: 26px;
+}
+#brief-list header .fa-search {
+	position: relative;
+    left: -26px;
+    color: #949494;
+    font-size: 16px;
+}
+/*content style*/
+#brief-list section{
+	margin: 0px 20px 15px;
+	padding: 15px 10px;
+	border:1px solid #bbb;
+	background-color: #fff;
+}
+#brief-list section.no-list-data {
+	border:none;
+	background-color: transparent;
+}
+
+/*brief form style*/
+#brief-list .default-btn {
+	color: #fff;
+	background-color: #78909c;
+	border: 1px solid #546e7a;
+}
+#brief-list section #add-brief-form {
+    border: 1px solid #bbb;
+    padding: 15px 10px 0 10px;
+    border-left: 20px solid #78909c;
+    margin-bottom: 15px;
+}
+#brief-list section #add-brief-form input {
+	display: inline-block;
+	width: 80%;
+	height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    margin-bottom: 10px;
+    text-indent: 1px;
+}
+#brief-list section #add-brief-form label {
+    width: 16%;
+    font-weight: normal;
+}
+#brief-list section #add-brief-form label .required-field {
+	padding-right: 5px;
+	font-size: 20px;
+	color:red;
+}
+#brief-list section #add-brief-form label.end-date {
+	margin-left: 23%;
+}
+#brief-list section #add-brief-form .form-date,
+#brief-list section #add-brief-form #report-by {
+	width: 20%;
+}
+#brief-list section #add-brief-form .form-date {
+	text-indent: 10px;
+}
+/*brief form  date style*/
+#brief-list section #add-brief-form .date-icon {
+	position: relative;
+    left: -30px;
+    top: 4px;
+}
+#brief-list section #add-brief-form .date-icon:before {
+	font-size: 18px;
+}
+#brief-list section #add-brief-form .request-report {
+	margin-left: 3%;
+}
+#brief-list section #add-brief-form .btn-group {
+	width: 30%;
+	height: 34px;
+    border-radius: 5px;
+    text-indent: 1px;
+}
+#brief-list section #add-brief-form .btn-group button {
+	height: 32px;
+	text-align: left;
+	border: 1px solid #bbb;
+}
+#brief-list section #add-brief-form .btn-group button.disabled {
+	color: black;
+	background-color: #EEEEEE;
+}
+#brief-list section #add-brief-form .btn-group button .caret {
+	float: right;
+    margin-top: 7px;
+}
+#brief-list section #add-brief-form .btn-group button,
+#brief-list section #add-brief-form .btn-group ul {
+	width: 100%;	
+}
+#brief-list section #add-brief-form .btn-group ul li {
+	padding: 3px 0;
+	cursor: pointer;
+	text-indent: 10px;
+}
+/* content - search/categroy*/
+#brief-list section #add-brief-form .position-block {
+	clear: both;
+}
+#brief-list section #add-brief-form .position-block label {
+	float: left;
+}
+#brief-list section #add-brief-form .position-block .right-content input {
+	text-indent: 10px;
+}
+#brief-list section #add-brief-form .right-content {
+	display: inline-block;
+	float: left;
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+#brief-list section #add-brief-form .right-content input {
+	width: 100%;
+}
+#brief-list section #add-brief-form .right-content textarea {
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	resize: none;
+}
+#brief-list section #add-brief-form .right-content.entities-block textarea {
+	width: 96%;
+}
+#brief-list section #add-brief-form .right-content.entities-block button {
+	float: right;
+	padding: 0;
+	width: 28px;
+	border: none!important;
+	background: none;
+    font-size: 18px;
+}
+#brief-list section #add-brief-form .right-content.threshold-box textarea {
+	width: 33%;
+}
+#brief-list section #add-brief-form .btn-block {
+	text-align: center;
+}
+#brief-list section #add-brief-form .default-btn {
+	margin: 10px 20px;
+	width: 10%;
+	text-align: center;
+}
+#brief-list section #add-brief-form .default-btn.report-generate,
+#brief-list section #add-brief-form .default-btn.create-workspace,
+#brief-list section #add-brief-form .default-btn.send-client {
+	width: 15%;
+}
+#brief-list section #add-brief-form .default-btn.to-workspace {
+	width: 17%;
+}
+
+/*brief list content style*/
+#brief-list-content {
+	
+}
+#brief-list-content li {
+	border:1px solid #bbb;
+	margin-bottom: 15px;
+	padding: 10px
+}
+#brief-list-content li.request {
+	border-left:20px solid #ffa726;
+}
+#brief-list-content li.generate {
+	border-left:20px solid #29b6f6;
+}
+#brief-list-content li.create {
+	border-left:20px solid #5c6bc0;
+}
+#brief-list-content li.publish {
+	border-left:20px solid #2baf2b;
+}
+#brief-list-content li .brief-date-range {
+	float: right;
+}
+#brief-list-content li .brief-op {
+    padding: 2px 5px;
+    font-size: 12px;
+    width: 58px;
+    margin-right: 10px;
+}
+#brief-list-content li .brief-workspace {
+	width: 115px;
+}
+#brief-list-content li .footer {
+	margin: 0;
+	text-align: right;
+}
+#brief-list-content .brief-title {
+	font-size: 16px;
+	font-weight: bold;
+}
+#brief-list-content .brief-description {
+	margin: 0;
+    width: 80%;
+    font-size: 13px;
+}
+#brief-list-content .important-hidden {
+	display: none!important;
+}

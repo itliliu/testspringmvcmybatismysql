@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ReportFileMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.ReportFile">
+		<id column="ReportFileID" property="reportfileid" jdbcType="INTEGER" />
+		<result column="ReportID" property="reportid" jdbcType="INTEGER" />
+		<result column="ReportFileUrl" property="reportfileurl"
+			jdbcType="VARCHAR" />
+		<result column="PowerBITemplateUrl" property="powerbitemplateurl"
+			jdbcType="VARCHAR" />
+		<result column="TilesProTemplateUrl" property="tilesprotemplateurl"
+			jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		ReportFileID, ReportID, ReportFileUrl, PowerBITemplateUrl, TilesProTemplateUrl,
+		Status,
+		InsertDate, LastModifyDate
+	</sql>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from ReportFile
+		where ReportFileID = #{reportfileid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from ReportFile
+		where ReportFileID = #{reportfileid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.ReportFile">
+		insert into ReportFile (ReportFileID, ReportID, ReportFileUrl,
+		PowerBITemplateUrl, TilesProTemplateUrl,
+		Status, InsertDate, LastModifyDate
+		)
+		values (#{reportfileid,jdbcType=INTEGER}, #{reportid,jdbcType=INTEGER},
+		#{reportfileurl,jdbcType=VARCHAR},
+		#{powerbitemplateurl,jdbcType=VARCHAR},
+		#{tilesprotemplateurl,jdbcType=VARCHAR},
+		#{status,jdbcType=INTEGER}, #{insertdate,jdbcType=BIGINT}, #{lastmodifydate,jdbcType=BIGINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.ReportFile">
+		insert into ReportFile
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="reportfileid != null">
+				ReportFileID,
+			</if>
+			<if test="reportid != null">
+				ReportID,
+			</if>
+			<if test="reportfileurl != null">
+				ReportFileUrl,
+			</if>
+			<if test="powerbitemplateurl != null">
+				PowerBITemplateUrl,
+			</if>
+			<if test="tilesprotemplateurl != null">
+				TilesProTemplateUrl,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="reportfileid != null">
+				#{reportfileid,jdbcType=INTEGER},
+			</if>
+			<if test="reportid != null">
+				#{reportid,jdbcType=INTEGER},
+			</if>
+			<if test="reportfileurl != null">
+				#{reportfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="powerbitemplateurl != null">
+				#{powerbitemplateurl,jdbcType=VARCHAR},
+			</if>
+			<if test="tilesprotemplateurl != null">
+				#{tilesprotemplateurl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ReportFile">
+		update ReportFile
+		<set>
+			<if test="reportid != null">
+				ReportID = #{reportid,jdbcType=INTEGER},
+			</if>
+			<if test="reportfileurl != null">
+				ReportFileUrl = #{reportfileurl,jdbcType=VARCHAR},
+			</if>
+			<if test="powerbitemplateurl != null">
+				PowerBITemplateUrl = #{powerbitemplateurl,jdbcType=VARCHAR},
+			</if>
+			<if test="tilesprotemplateurl != null">
+				TilesProTemplateUrl = #{tilesprotemplateurl,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</set>
+		where ReportFileID = #{reportfileid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.ReportFile">
+		update ReportFile
+		set ReportID = #{reportid,jdbcType=INTEGER},
+		ReportFileUrl = #{reportfileurl,jdbcType=VARCHAR},
+		PowerBITemplateUrl = #{powerbitemplateurl,jdbcType=VARCHAR},
+		TilesProTemplateUrl = #{tilesprotemplateurl,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+		where ReportFileID = #{reportfileid,jdbcType=INTEGER}
+	</update>
+	<select id="createReportFile" parameterType="java.util.Map" statementType="CALLABLE"
+		resultType="java.lang.Integer">
+		{
+			CALL CreateReportFile(
+				#{reportid, jdbcType=INTEGER},
+				#{tilesprotemplateid, jdbcType=INTEGER},
+				#{powerbitemplateid, jdbcType=INTEGER},
+				#{reportfileurl, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	<select id="updateReportFile" parameterType="com.we.bean.ReportFile" statementType="CALLABLE"
+		resultType="java.lang.Integer">
+		{
+			CALL UpdateReportFile(
+				#{reportid, jdbcType=INTEGER},
+				#{reportfileurl, jdbcType=VARCHAR}
+			)
+		}
+	</select>
+	
+	
+	<select id="getReportFilePath" parameterType="int" resultType="map">
+		SELECT projectBrief.ProjectBriefName, 
+			client.ClientName, client.ClientID, reportFile.ReportFileUrl,report.ProjectID
+		FROM Report report
+		LEFT JOIN ProjectBrief projectBrief
+		ON report.ProjectID = projectBrief.ProjectBriefID OR report.ProjectID = projectBrief.ParentID
+		LEFT JOIN Client client
+		ON client.ClientID = projectBrief.ClientID
+		LEFT JOIN ReportFile reportFile
+		ON reportFile.ReportID = report.ReportID
+		WHERE report.ReportID = #{reportID, jdbcType=INTEGER} AND projectBrief.Status>=0;
+	</select>
+	
+	
+</mapper>

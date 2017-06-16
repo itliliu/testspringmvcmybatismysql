@@ -1,0 +1,116 @@
+/*templateList header style*/
+#template-list header {
+	padding: 25px 20px;
+}
+#template-list header .add-btn {
+	float: right;
+	border:none;
+	background-color: #f0f0f2;
+	color: #949494;
+}
+#template-list header .add-btn .fa-plus {
+	font-size: 40px;
+}
+#template-list header .search {
+	width: 100%;
+  height: 34px;
+  border-radius: 5px;
+  border: 1px solid #bbb;
+  font-size: 12px;
+  text-indent: 4px;
+  padding-right: 26px;
+}
+#template-list .btn-group{
+  margin-right: 4px;
+}
+#template-list .btn-group .select-control{
+  width: 100%;
+}
+/*list style*/
+#template-list section,
+#template-form .formPane {
+    margin: 0px 20px 15px;
+    padding: 15px 10px;
+    border: 1px solid #bbb;
+    background-color: #fff;
+}
+#template-list .template-list-table table {
+    border: 1px solid;
+    width: 90%;
+}
+#template-list .template-list-table table th,
+#template-list .template-list-table table td {
+  border-right: 1px solid;
+  border-bottom: 1px solid;
+  padding: 5px 10px;
+  text-align: left;
+}
+#template-list .template-list-table table td a {
+  text-align: center;
+  padding:0 5px;
+}
+/*templateForm Style*/
+#template-form {
+    padding-top: 20px;
+}
+#template-form .formPane .formbtn{
+  text-align: center;
+}
+#template-form .formPane .default-btn{
+    margin: 10px 20px;
+    width: 10%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    text-align: center;
+    color: #fff;
+    background-color: #78909c;
+}
+#template-form .formPane textarea{
+    width:100%;
+    border: 1px solid #ccc;
+    resize:none;
+    border-radius: 4px;
+    transition: border-color ease-in-out .15s,box-shadow ease-in-out .15s;
+}
+#template-form .formPane label{
+  padding-left: 20px;
+}
+#template-form .formPane .tempType label,
+#template-form .formPane .clientType label{
+  padding-left: 4px;
+}
+#template-form .formPane .tempType .btn-group,
+#template-form .formPane .clientType .btn-group {
+    padding: 0 10px;
+}
+#template-form .default-btn.form-btn{
+    margin: 10px 20px;
+    width: 10%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    text-align: center;
+    color: #fff;
+    background-color: #78909c;
+}
+#template-form .formbtn{
+    text-align: center;
+}
+#template-form .formPane .required{
+    color:red;
+}
+#template-form .default-btn.form-btn{
+    margin: 10px 20px;
+    width: 10%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    text-align: center;
+    color: #fff;
+    background-color: #78909c;
+}
+#template-form .form-group.form-format .col-md-3,
+#template-form .form-group.form-report-type .col-md-3 {
+    width: 24.5%;
+}

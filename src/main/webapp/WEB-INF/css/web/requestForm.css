@@ -1,0 +1,144 @@
+/*Request form style*/
+#request-form .default-btn {
+	color: #fff;
+	background-color: #78909c;
+	border: 1px solid #546e7a;
+}
+#request-form input {
+	display: inline-block;
+	width: 80%;
+	height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    /*margin-bottom: 10px;*/
+    text-indent: 1px;
+}
+#request-form label {
+    width: 16%;
+    font-weight: normal;
+}
+#request-form label .required-field {
+	padding-right: 5px;
+	font-size: 20px;
+	color:red;
+}
+#request-form label.end-date {
+	margin-left: 23%;
+}
+#request-form .form-date,
+#request-form #report-by {
+	width: 20%;
+}
+#request-form .form-date {
+	text-indent: 10px;
+}
+/*brief form  date style*/
+#request-form .date-icon {
+	position: relative;
+    left: -30px;
+    top: 4px;
+}
+#request-form .date-icon:before {
+	font-size: 18px;
+}
+#request-form .request-report {
+	margin-left: 3%;
+}
+#request-form .btn-group {
+	width: 30%;
+	height: 34px;
+    border-radius: 5px;
+    text-indent: 1px;
+}
+#request-form .btn-group button {
+	height: 32px;
+	text-align: left;
+	border: 1px solid #bbb;
+}
+#request-form .btn-group button.disabled {
+	color: black;
+	background-color: #EEEEEE;
+}
+#request-form .btn-group button .caret {
+	float: right;
+    margin-top: 7px;
+}
+#request-form .btn-group button,
+#request-form .btn-group ul {
+	width: 100%;	
+}
+#request-form .btn-group ul li {
+	padding: 3px 0;
+	cursor: pointer;
+	text-indent: 10px;
+}
+/* content - search/categroy*/
+#request-form .position-block {
+	clear: both;
+}
+#request-form .position-block label {
+	float: left;
+}
+#request-form .position-block .right-content input {
+	text-indent: 10px;
+}
+#request-form .right-content {
+	display: inline-block;
+	float: left;
+    width: 80%;
+    margin-bottom: 25px;
+}
+
+#request-form .right-content input {
+	width: 100%;
+}
+#request-form .right-content textarea {
+	padding: 10px;
+	width: 100%;
+	border: 1px solid #bbb;
+	border-radius: 4px;
+	resize: none;
+}
+#request-form .right-content.entities-block textarea {
+	width: 96%;
+}
+#request-form .right-content.entities-block button {
+	float: right;
+	padding: 0;
+	width: 28px;
+	border: none!important;
+	background: none;
+    font-size: 18px;
+}
+#request-form .right-content.threshold-box textarea {
+	width: 33%;
+}
+#request-form .btn-block {
+	text-align: center;
+}
+#request-form .default-btn {
+	margin: 10px 20px;
+	width: 10%;
+	text-align: center;
+}
+#request-form .default-btn.report-generate,
+#request-form .default-btn.create-workspace,
+#request-form .default-btn.send-client {
+	width: 15%;
+}
+#request-form .default-btn.to-workspace {
+	width: 17%;
+}
+
+#request-form .report-table table tr td:nth-child(4) {
+	padding-right: 25px;
+}
+#request-form .report-table table tr td:nth-child(5) input {
+	padding-top: 10px;
+	width:100%;
+	border:none;
+}
+
+#request-form .report-table .btn-group {
+	width: 100%;
+}

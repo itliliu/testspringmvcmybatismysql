@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.UserMapper">
+	<resultMap id="BaseResultMap" type="com.we.bean.User">
+		<id column="UserID" property="userid" jdbcType="INTEGER" />
+		<result column="UserName" property="username" jdbcType="VARCHAR" />
+		<result column="RoleID" property="roleid" jdbcType="INTEGER" />
+		<result column="Email" property="email" jdbcType="VARCHAR" />
+		<result column="Status" property="status" jdbcType="INTEGER" />
+		<result column="InsertDate" property="insertdate" jdbcType="BIGINT" />
+		<result column="LastModifyDate" property="lastmodifydate"
+			jdbcType="BIGINT" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		UserID, UserName, RoleID, Email, Status, InsertDate, LastModifyDate
+	</sql>
+	
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM User
+		WHERE UserID = #{userid,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		DELETE FROM User
+		WHERE UserID = #{userid,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.we.bean.User" useGeneratedKeys="true" keyProperty="userid">
+		INSERT INTO User (UserID, UserName, RoleID,
+		Email, Status, InsertDate,
+		LastModifyDate)
+		values (#{userid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR},
+		#{roleid,jdbcType=INTEGER},
+		#{email,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, unix_timestamp(now()),
+		unix_timestamp(now()))
+	</insert>
+	<insert id="insertSelective" parameterType="com.we.bean.User" useGeneratedKeys="true" keyProperty="userid">
+		INSERT INTO User
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				UserID,
+			</if>
+			<if test="username != null">
+				UserName,
+			</if>
+			<if test="roleid != null">
+				RoleID,
+			</if>
+			<if test="email != null">
+				Email,
+			</if>
+			<if test="status != null">
+				Status,
+			</if>
+			<if test="insertdate != null">
+				InsertDate,
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="userid != null">
+				#{userid,jdbcType=INTEGER},
+			</if>
+			<if test="username != null">
+				#{username,jdbcType=VARCHAR},
+			</if>
+			<if test="roleid != null">
+				#{roleid,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				#{email,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				#{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				#{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.we.bean.User">
+		UPDATE User
+		<set>
+			<if test="username != null">
+				UserName = #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="roleid != null">
+				RoleID = #{roleid,jdbcType=INTEGER},
+			</if>
+			<if test="email != null">
+				Email = #{email,jdbcType=VARCHAR},
+			</if>
+			<if test="status != null">
+				Status = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="insertdate != null">
+				InsertDate = #{insertdate,jdbcType=BIGINT},
+			</if>
+			<if test="lastmodifydate != null">
+				LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+			</if>
+		</set>
+		WHERE UserID = #{userid,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.we.bean.User">
+		UPDATE User
+		SET UserName = #{username,jdbcType=VARCHAR},
+		RoleID = #{roleid,jdbcType=INTEGER},
+		Email = #{email,jdbcType=VARCHAR},
+		Status = #{status,jdbcType=INTEGER},
+		InsertDate = #{insertdate,jdbcType=BIGINT},
+		LastModifyDate = #{lastmodifydate,jdbcType=BIGINT}
+		WHERE UserID = #{userid,jdbcType=INTEGER}
+	</update>
+
+
+	<select id="vaildateUser" parameterType="java.lang.String"
+		resultType="java.util.Map" statementType="CALLABLE">
+
+		{
+		CALL UserLogin(
+		#{username, jdbcType=VARCHAR}
+		)
+		}
+
+
+
+	</select>
+	
+	<select id="getUserForPage" parameterType="java.util.Map"
+		resultType="java.util.Map" >
+
+	SELECT * FROM (SELECT  u.* ,r.RoleName ,ucm.clientids as 'clientids' 
+		FROM User u LEFT JOIN Role r ON u.RoleID = r.RoleID  
+		LEFT join  (SELECT GROUP_CONCAT(CAST(clientid AS char)) clientids,UserID 
+		FROM UserClientMap GROUP BY UserID) ucm ON u.UserID=ucm.UserID ) as tempUser
+	WHERE 1=1 
+	<if test='clientid and clientid>0'>
+		AND  (tempUser.RoleID!=1 OR tempUser.clientids like CONCAT('%,',#{clientid},',%') 
+  	 	OR tempUser.clientids like CONCAT(#{clientid},',%') OR tempUser.clientids like CONCAT('%,',#{clientid}) OR tempUser.clientids like CONCAT(#{clientid}) )
+	</if>
+	<if test='keyword!=null and keyword!=""'>
+		AND (tempUser.UserName like CONCAT('%',#{keyword},'%') OR tempUser.Email LIKE CONCAT('%',#{keyword},'%') OR tempUser.UserID like CONCAT(#{keyword}) )
+	</if>
+	ORDER BY (tempUser.UserID) desc
+    <if test="rows!=null and page!=null">
+			limit ${page},${rows}
+	</if> 
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="getCountUser" parameterType="java.util.Map" resultType="int">
+	
+	SELECT COUNT(*) FROM (SELECT  u.* ,r.RoleName ,ucm.clientids as 'clientids' 
+		FROM User u LEFT JOIN Role r ON u.RoleID = r.RoleID  
+		LEFT join  (SELECT GROUP_CONCAT(CAST(clientid AS char)) clientids,UserID 
+		FROM UserClientMap GROUP BY UserID) ucm ON u.UserID=ucm.UserID ) as tempUser
+	WHERE 1=1 
+	<if test='clientid!=null and clientid>0'>
+		AND (tempUser.RoleID!=1 OR tempUser.clientids like CONCAT('%,',#{clientid},',%') 
+  	 	OR tempUser.clientids like CONCAT(#{clientid},',%') OR tempUser.clientids like CONCAT('%,',#{clientid}) OR tempUser.clientids like CONCAT(#{clientid}) )
+	</if>
+	<if test='keyword!=null and keyword!=""'>
+		AND (tempUser.UserName like CONCAT('%',#{keyword},'%') OR tempUser.Email LIKE CONCAT('%',#{keyword},'%') OR tempUser.UserID like CONCAT(#{keyword})  )
+	</if>
+	</select>
+	
+	<select id="selectByName" resultMap="BaseResultMap"
+		parameterType="string">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM User
+		WHERE UserName = #{userName}
+	</select>
+</mapper>

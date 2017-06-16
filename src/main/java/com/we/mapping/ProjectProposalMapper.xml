@@ -1,0 +1,339 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.we.dao.ProjectProposalMapper" >
+  <resultMap id="BaseResultMap" type="com.we.bean.ProjectProposalResult" >
+    <id column="ProjectProposalID" property="projectProposalID" jdbcType="INTEGER" />
+    <result column="ProjectProposalName" property="projectProposalName" jdbcType="VARCHAR" />
+    <result column="Situation" property="situation" jdbcType="VARCHAR" />
+    <result column="Objective" property="objective" jdbcType="VARCHAR" />
+    <result column="Approach" property="approach" jdbcType="VARCHAR" />
+    <result column="Deliverables" property="deliverables" jdbcType="VARCHAR" />
+    <result column="Pricing" property="pricing" jdbcType="VARCHAR" />
+    <result column="TimelineMilestones" property="timelineMilestones" jdbcType="VARCHAR" />
+    <result column="Contact" property="contact" jdbcType="VARCHAR" />
+    <result column="Status" property="status" jdbcType="INTEGER" />
+    <result column="Version" property="version" jdbcType="INTEGER" />
+    <result column="Comment" property="comment" jdbcType="VARCHAR" />
+    <result column="ParentID" property="parentID" jdbcType="INTEGER" />
+    <result column="ProjectBriefID" property="projectBriefID" jdbcType="INTEGER" />
+    <result column="InsertDate" property="insertDate" jdbcType="BIGINT" />
+    <result column="LastModifyDate" property="lastModifyDate" jdbcType="BIGINT" />
+    <result column="UserID" property="userid" jdbcType="INTEGER" />
+    <result column="ClientID" property="clientID" jdbcType="INTEGER" />
+    <result column="LastOperatorDate" property="lastOperatorDate" jdbcType="BIGINT" />  
+    <result column="BriefUserID" property="briefUserID" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    ProjectProposalID, ProjectProposalName, Situation, Objective, Approach, Deliverables, 
+    Pricing, TimelineMilestones, Contact, Status, Version, Comment, ParentID, ProjectBriefID, 
+    InsertDate, LastModifyDate, UserID, ClientID, LastOperatorDate
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from ProjectProposal
+    where ProjectProposalID = #{projectProposalId,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from ProjectProposal
+    where ProjectProposalID = #{projectProposalId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.we.bean.ProjectProposal" >
+    insert into ProjectProposal (ProjectProposalID, ProjectProposalName, 
+      Situation, Objective, Approach, 
+      Deliverables, Pricing, TimelineMilestones, 
+      Contact, Status, Version, 
+      Comment, ParentID, ProjectBriefID, 
+      InsertDate, LastModifyDate, Uid, 
+      ClientID, LastOperatorDate)
+    values (#{projectProposalID,jdbcType=INTEGER}, #{projectProposalName,jdbcType=VARCHAR}, 
+      #{situation,jdbcType=VARCHAR}, #{objective,jdbcType=VARCHAR}, #{approach,jdbcType=VARCHAR}, 
+      #{deliverables,jdbcType=VARCHAR}, #{pricing,jdbcType=VARCHAR}, #{timelineMilestones,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{version,jdbcType=INTEGER}, 
+      #{comment,jdbcType=VARCHAR}, #{parentID,jdbcType=INTEGER}, #{projectBriefID,jdbcType=INTEGER}, 
+      #{insertDate,jdbcType=BIGINT}, #{lastModifyDate,jdbcType=BIGINT}, #{userid,jdbcType=INTEGER}, 
+      #{clientID,jdbcType=INTEGER}, #{lastOperatorDate,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.we.bean.ProjectProposal" >
+    insert into ProjectProposal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="projectproposalid != null" >
+        ProjectProposalID,
+      </if>
+      <if test="projectproposalname != null" >
+        ProjectProposalName,
+      </if>
+      <if test="situation != null" >
+        Situation,
+      </if>
+      <if test="objective != null" >
+        Objective,
+      </if>
+      <if test="approach != null" >
+        Approach,
+      </if>
+      <if test="deliverables != null" >
+        Deliverables,
+      </if>
+      <if test="pricing != null" >
+        Pricing,
+      </if>
+      <if test="timelinemilestones != null" >
+        TimelineMilestones,
+      </if>
+      <if test="contact != null" >
+        Contact,
+      </if>
+      <if test="status != null" >
+        Status,
+      </if>
+      <if test="version != null" >
+        Version,
+      </if>
+      <if test="comment != null" >
+        Comment,
+      </if>
+      <if test="parentid != null" >
+        ParentID,
+      </if>
+      <if test="projectbriefid != null" >
+        ProjectBriefID,
+      </if>
+      <if test="insertdate != null" >
+        InsertDate,
+      </if>
+      <if test="lastmodifydate != null" >
+        LastModifyDate,
+      </if>
+      <if test="uid != null" >
+        Uid,
+      </if>
+      <if test="clientid != null" >
+        ClientID,
+      </if>
+      <if test="lastoperatordate != null" >
+        LastOperatorDate,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="projectproposalid != null" >
+        #{projectproposalid,jdbcType=INTEGER},
+      </if>
+      <if test="projectproposalname != null" >
+        #{projectproposalname,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null" >
+        #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="objective != null" >
+        #{objective,jdbcType=VARCHAR},
+      </if>
+      <if test="approach != null" >
+        #{approach,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverables != null" >
+        #{deliverables,jdbcType=VARCHAR},
+      </if>
+      <if test="pricing != null" >
+        #{pricing,jdbcType=VARCHAR},
+      </if>
+      <if test="timelinemilestones != null" >
+        #{timelinemilestones,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        #{version,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="projectbriefid != null" >
+        #{projectbriefid,jdbcType=INTEGER},
+      </if>
+      <if test="insertdate != null" >
+        #{insertdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        #{lastmodifydate,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientid != null" >
+        #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="lastoperatordate != null" >
+        #{lastoperatordate,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.we.bean.ProjectProposal" >
+    update ProjectProposal
+    <set >
+      <if test="projectproposalname != null" >
+        ProjectProposalName = #{projectproposalname,jdbcType=VARCHAR},
+      </if>
+      <if test="situation != null" >
+        Situation = #{situation,jdbcType=VARCHAR},
+      </if>
+      <if test="objective != null" >
+        Objective = #{objective,jdbcType=VARCHAR},
+      </if>
+      <if test="approach != null" >
+        Approach = #{approach,jdbcType=VARCHAR},
+      </if>
+      <if test="deliverables != null" >
+        Deliverables = #{deliverables,jdbcType=VARCHAR},
+      </if>
+      <if test="pricing != null" >
+        Pricing = #{pricing,jdbcType=VARCHAR},
+      </if>
+      <if test="timelinemilestones != null" >
+        TimelineMilestones = #{timelinemilestones,jdbcType=VARCHAR},
+      </if>
+      <if test="contact != null" >
+        Contact = #{contact,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        Status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="version != null" >
+        Version = #{version,jdbcType=INTEGER},
+      </if>
+      <if test="comment != null" >
+        Comment = #{comment,jdbcType=VARCHAR},
+      </if>
+      <if test="parentid != null" >
+        ParentID = #{parentid,jdbcType=INTEGER},
+      </if>
+      <if test="projectbriefid != null" >
+        ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+      </if>
+      <if test="insertdate != null" >
+        InsertDate = #{insertdate,jdbcType=BIGINT},
+      </if>
+      <if test="lastmodifydate != null" >
+        LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+      </if>
+      <if test="uid != null" >
+        Uid = #{uid,jdbcType=INTEGER},
+      </if>
+      <if test="clientid != null" >
+        ClientID = #{clientid,jdbcType=INTEGER},
+      </if>
+      <if test="lastoperatordate != null" >
+        LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT},
+      </if>
+    </set>
+    where ProjectProposalID = #{projectproposalid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.we.bean.ProjectProposal" >
+    update ProjectProposal
+    set ProjectProposalName = #{projectproposalname,jdbcType=VARCHAR},
+      Situation = #{situation,jdbcType=VARCHAR},
+      Objective = #{objective,jdbcType=VARCHAR},
+      Approach = #{approach,jdbcType=VARCHAR},
+      Deliverables = #{deliverables,jdbcType=VARCHAR},
+      Pricing = #{pricing,jdbcType=VARCHAR},
+      TimelineMilestones = #{timelinemilestones,jdbcType=VARCHAR},
+      Contact = #{contact,jdbcType=VARCHAR},
+      Status = #{status,jdbcType=INTEGER},
+      Version = #{version,jdbcType=INTEGER},
+      Comment = #{comment,jdbcType=VARCHAR},
+      ParentID = #{parentid,jdbcType=INTEGER},
+      ProjectBriefID = #{projectbriefid,jdbcType=INTEGER},
+      InsertDate = #{insertdate,jdbcType=BIGINT},
+      LastModifyDate = #{lastmodifydate,jdbcType=BIGINT},
+      Uid = #{uid,jdbcType=INTEGER},
+      ClientID = #{clientid,jdbcType=INTEGER},
+      LastOperatorDate = #{lastoperatordate,jdbcType=BIGINT}
+    where ProjectProposalID = #{projectproposalid,jdbcType=INTEGER}
+  </update>
+  <select id="saveProjectProposal" statementType="CALLABLE" parameterType="com.we.bean.ProjectProposalResult"
+  	resultType="java.lang.Integer">
+  CALL we_project.SaveProjectProposal(
+  #{projectProposalID,jdbcType=INTEGER}, #{projectProposalName,jdbcType=VARCHAR}, 
+      #{situation,jdbcType=VARCHAR}, #{objective,jdbcType=VARCHAR}, #{approach,jdbcType=VARCHAR}, 
+      #{deliverables,jdbcType=VARCHAR}, #{pricing,jdbcType=VARCHAR}, #{timelineMilestones,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{parentID,jdbcType=INTEGER}, #{projectBriefID,jdbcType=INTEGER}, 
+       #{userid,jdbcType=INTEGER}, 
+      #{clientID,jdbcType=INTEGER}
+  )
+  </select>
+  <select id="submitProjectProposal" statementType="CALLABLE" 
+  	parameterType="com.we.bean.ProjectProposalResult" resultType="java.lang.Integer">
+  CALL we_project.SubmitProjectProposal(
+  #{projectProposalID,jdbcType=INTEGER}, #{projectProposalName,jdbcType=VARCHAR}, 
+      #{situation,jdbcType=VARCHAR}, #{objective,jdbcType=VARCHAR}, #{approach,jdbcType=VARCHAR}, 
+      #{deliverables,jdbcType=VARCHAR}, #{pricing,jdbcType=VARCHAR}, #{timelineMilestones,jdbcType=VARCHAR}, 
+      #{contact,jdbcType=VARCHAR}, 
+      #{comment,jdbcType=VARCHAR}, #{parentID,jdbcType=INTEGER}, #{projectBriefID,jdbcType=INTEGER}, 
+       #{userid,jdbcType=INTEGER}, 
+      #{clientID,jdbcType=INTEGER}
+  )
+  </select>
+  <update id="rejectProjectProposal" parameterType="com.we.bean.ProjectProposalResult">
+  UPDATE ProjectProposal 
+  SET Status=1, Comment=#{comment,jdbcType=VARCHAR},LastModifyDate=unix_timestamp(now()),
+  		 LastOperatorDate=unix_timestamp(now()) 
+  WHERE ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} 
+  AND Status > 0;
+  </update>
+  <update id="rejectProjectProposalBrief" parameterType="com.we.bean.ProjectProposalResult">
+  UPDATE ProjectBrief SET Status=1,LastModifyDate=unix_timestamp(now()),
+  		 LastOperatorDate=unix_timestamp(now()) 
+  WHERE (ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} OR ParentID = #{projectBriefID,jdbcType=INTEGER}) 
+  	AND Status > 0;
+  </update>
+  <update id="approveProjectProposal" parameterType="com.we.bean.ProjectProposalResult">
+  UPDATE ProjectProposal SET Status=3,LastModifyDate=unix_timestamp(now()),
+  		 LastOperatorDate=unix_timestamp(now()) 
+  WHERE ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} 
+  	AND Status > 0;
+  </update>
+  <update id="approveProjectProposalBrief" parameterType="com.we.bean.ProjectProposalResult">
+  UPDATE ProjectBrief SET Status=3,LastModifyDate=unix_timestamp(now()),
+  		 LastOperatorDate=unix_timestamp(now()) 
+  WHERE (ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} OR ParentID = #{projectBriefID,jdbcType=INTEGER}) 
+  AND Status > 0;
+  </update>
+  <sql id="Proposal_result_Column_List" >
+    proposal.ProjectProposalID, proposal.ProjectProposalName, proposal.Situation, 
+    proposal.Objective, proposal.Approach, proposal.Deliverables, 
+    proposal.Pricing, proposal.TimelineMilestones, proposal.Contact, proposal.Status, 
+    proposal.Version, proposal.Comment, proposal.ParentID, proposal.ProjectBriefID, 
+    proposal.InsertDate, proposal.LastModifyDate, proposal.UserID, 
+    proposal.ClientID, proposal.LastOperatorDate,
+    brief.UserID AS BriefUserID
+  </sql>
+  <select id="getProjectProposalByPrimaryKeyUidAndClient"  resultMap="BaseResultMap"
+   parameterType="java.lang.Integer">
+    SELECT 
+    <include refid="Proposal_result_Column_List" />
+    FROM ProjectBrief brief LEFT JOIN ProjectProposal proposal
+    	ON brief.ProjectBriefID=proposal.ProjectBriefID OR brief.ParentID=proposal.ProjectBriefID
+    WHERE proposal.ProjectBriefID = #{projectBriefID,jdbcType=INTEGER} 
+    AND brief.Status>=0 AND (proposal.Status>0 OR proposal.Status IS NULL);
+   </select>
+   <update id="updateProjectProposalDate" parameterType="java.lang.Integer">
+		UPDATE ProjectProposal SET LastOperatorDate=unix_timestamp(now()),
+			LastModifyDate=unix_timestamp(now())
+		WHERE ProjectBriefID=#{projectBriefID,jdbcType=INTEGER} AND Status>0
+	</update>
+	<select id="getProjectPoroposalByBrirfID" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		SELECT
+			<include refid="Base_Column_List" />
+		FROM ProjectProposal 
+		WHERE Status>0 AND ProjectBriefID=#{briefID,jdbcType=INTEGER} LIMIT 1;
+	</select>
+</mapper>

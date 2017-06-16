@@ -1,0 +1,259 @@
+
+<section class="creatBrief">
+<div ng-controller="newBriefCtrl">
+    <h3>CREATE A NEW BRIEF</h3>
+    <form class="brief-form">
+        <div class="form-group formgroup">
+            <label class="detailTitle detailTitle1">I want to name my report:</label>
+            <input type="text" class="input-position input-size" ng-model="reportName">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">I want to search the period from:</label>
+            <input type="text" placeholder="mm/dd/yyyy" class="input-position  mininput-size" datetimepicker date-format="mm/dd/yyyy" min-view='month' ng-model='briefForm.searchStartDate' >
+            <span>&nbsp; to &nbsp;</span>
+            <input type="text" placeholder="mm/dd/yyyy" class="mininput-size" datetimepicker date-format="mm/dd/yyyy" min-view='month' ng-model='briefForm.searchEndDate' >
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">Event Overview:</label>
+            <textarea type="text" class="input-position biginput-size" ng-model="briefForm.eventOverview"></textarea>
+            <div>
+                <div class="checkboxFour radio-position">
+                    <input type="checkbox"  value="1" id="checkboxOneInput" ng-modal='briefForm.isConfidential'>
+                    <label for="checkboxOneInput"></label>
+                </div>
+                <label class="wordsInfo">This event is Confidential </label>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="clearfix"></div>
+        <span class="detailTitle"> I want to search for...</span>
+        <div class="form-group">
+            <label class="detailTitle label-position">All of</label>
+            <label>Any one of</label>
+        </div>
+        <div class="form-group">
+            <div class="checkboxFour spradio-position">
+                <input type="checkbox"  value="1" id="checkboxOInput">
+                <label for="checkboxOInput"></label>
+            </div>
+            <div class="checkboxFour spradio2-position">
+                <input type="checkbox"  value="1" id="checkboxTInput">
+                <label for="checkboxTInput"></label>
+            </div>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;&nbsp;Event name with&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;&nbsp;without these&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+        </div>
+   
+        <div class="form-group"  ng-repeat="brand in briefForm.brandList">
+            <div class="checkboxFour spradio-position">
+                <input type="checkbox"  value="1" id="checkboxInput{{$index}}">
+                <label for="checkboxInput{{$index}}"></label>
+            </div>
+            <div class="checkboxFour spradio2-position">
+                <input type="checkbox"  value="1" id="checkboxOInput{{$index}}">
+                <label for="checkboxOInput{{$index}}"></label>
+            </div>
+            <input type="text" class="mininput-size" ng-model="brand.firstInput">
+            <label>&nbsp;&nbsp;&nbsp;Brand name with&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size" ng-model="brand.secondInput" >
+            <label>&nbsp;&nbsp;&nbsp;without these&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size"  ng-model="brand.thirdInput">
+            <i class="fa fa-minus-circle" style=" margin-left: 10px;" ng-click="removeBrand($index)" ng-hide="$index == 0"></i>
+        </div>
+        <div class="form-group">
+            <button class="btn addbtn"  ng-click="toggleBrand()">Add up to 4 more +</button>
+        </div>
+
+        <div class="form-group" ng-repeat="product in briefForm.productList">
+            <div class="checkboxFour spradio-position">
+                <input type="checkbox"  value="1" id="checkboxTInput{{$index}}">
+                <label for="checkboxTInput{{$index}}"></label>
+            </div>
+            <div class="checkboxFour spradio2-position">
+                <input type="checkbox"  value="1" id="checkboxThInput{{$index}}">
+                <label for="checkboxThInput{{$index}}"></label>
+            </div>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;Product name with&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;&nbsp;without these&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <i class="fa fa-minus-circle" style=" margin-left: 10px;" ng-click="removeProduct($index)" ng-hide="$index == 0"></i>
+        </div>
+        <div class="form-group">
+            <button class="btn addbtn" ng-click="toggleProduct()">Add up to 4 more +</button>
+        </div>
+  
+        <div class="form-group" ng-repeat="people in briefForm.peopleList">
+            <div class="checkboxFour spradio-position">
+                <input type="checkbox"  value="1" id="checkboxFInput{{$index}}">
+                <label for="checkboxFInput{{$index}}"></label>
+            </div>
+            <div class="checkboxFour spradio2-position">
+                <input type="checkbox"  value="1" id="checkboxFiInput{{$index}}">
+                <label for="checkboxFiInput{{$index}}"></label>
+            </div>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;People name with&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;&nbsp;without these&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <i class="fa fa-minus-circle" style=" margin-left: 10px;" ng-click="removePeople($index)" ng-hide="$index == 0"></i>
+        </div>
+     
+        <div class="form-group" ng-repeat="competitor in briefForm.competitorList">
+            <div class="checkboxFour spradio-position spradio-position1">
+                <input type="checkbox"  value="1" id="checkboxSInput{{$index}}">
+                <label for="checkboxSInput{{$index}}"></label>
+            </div>
+            <div class="checkboxFour spradio2-position spradio2-position2">
+                <input type="checkbox"  value="1" id="checkboxSeInput{{$index}}">
+                <label for="checkboxSeInput{{$index}}"></label>
+            </div>
+            <input type="text" class="mininput-size">
+            <label class="labelinfo">&nbsp;&nbsp;&nbsp;Competitor name <br>&nbsp;&nbsp;&nbsp;with</label>
+            <input type="text" class="mininput-size">
+            <label>&nbsp;&nbsp;&nbsp;without these&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size">
+            <i class="fa fa-minus-circle" style=" margin-left: 10px;" ng-click="removeCompetitor($index)" ng-hide="$index == 0"></i>
+        </div>
+        <div class="form-group">
+            <button class="btn addbtn" ng-click="toggleCompetitor()">Add up to 4 more +</button>
+        </div>
+        <div class="form-group">
+            <div class="checkboxFour spradio-position">
+                <input type="checkbox"  value="1" id="checkboxTwInput">
+                <label for="checkboxTwInput"></label>
+            </div>
+            <div class="checkboxFour spradio2-position">
+                <input type="checkbox"  value="1" id="checkboxThiInput">
+                <label for="checkboxThiInput"></label>
+            </div>
+            <input type="text" class="mininput-size position-float position-float1 ">
+            <label  class="position-float">&nbsp;&nbsp;&nbsp;Words/terms<br>&nbsp;&nbsp;&nbsp;within the name&nbsp;&nbsp;&nbsp;</label>
+            <div class="dropdown-list">
+              <button type="button" class="btn dropdown-toggle langinfo mininput-size" data-toggle="dropdown">Sentence
+                  <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu" role="menu">
+                  <li>
+                      <a href="#">Paragraph</a>
+                  </li>
+                  <li>
+                      <a href="#">Article</a>
+                  </li>
+              </ul>
+            </div>
+            <label class="speinfo position-float">&nbsp;&nbsp;&nbsp;as&nbsp;&nbsp;&nbsp;</label>
+            <input type="text" class="mininput-size position-float">
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group spegroup">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size ">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">...this key message:</label>
+            <input type="text" class="input-position input-size">
+        </div>
+        <div class="form-group">
+            <div class="checkboxFour checkbox-info">
+                <input type="checkbox"  value="1" id="checkboxTwoInput">
+                <label for="checkboxTwoInput"></label>
+            </div>
+            <label class="labelinfo">Filter coverage by these priority Products, <br>Executives or Competitors</label>
+            <input type="text" class="speinput-position input-size ">
+        </div>
+        <div class="form-group">
+            <div class="checkboxFour checkbox-info1">
+                <input type="checkbox"  value="1" id="checkboxThrInput">
+                <label for="checkboxThrInput"></label>
+            </div>
+            <label>I also want to track the Sentiment of these terms</label>
+            <textarea type="text" class="biginput2-size"></textarea>
+        </div>
+        <div class="form-group spegroup ">
+            <label class="detailTitle detailTitle1">I want to Search These Media Sources... </label>
+            <label class="input-position speradio-position "><input name="mediaSources" type="radio" value="" class="radiopos"/>Use my term's Standard Media List</label>
+            <label  class="speradio-position speradio2-position "><input name="mediaSources" type="radio" value="" class="radiopos"/>Custom Media List URLs</label>
+            <textarea type="text" class="input-position biginput-size speradio2-position"></textarea>
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">I ultimately want to determine</label>
+            <input type="text" class="input-position input-size" ng-modal="briefForm.finalDetermine">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">What's most significant to me in an article is</label>
+            <input type="text" class="input-position input-size" ng-modal="briefForm.mostSignificant">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">For reports that require Influence tracking,<br> who are the Influencers?</label>
+            <input type="text" class="input-position input-size" ng-modal="briefForm.influencers">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1 position-float">Select a Standard Report Template</label>
+            <div class="dropdown-list2 position-float1">
+                <button type="button" class="btn dropdown-toggle langinfo input-position " data-toggle="dropdown">Competitive Intrustion
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu drop-position" role="menu">
+                    <li>
+                        <a href="#">Influencers,Inc.</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">Project ID</label>
+            <input type="text" class="input-position input-size" ng-modal="briefForm.projectId">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">Activity Code</label>
+            <input type="text" class="input-position input-size" ng-modal="briefForm.activityCode">
+        </div>
+        <div class="form-group">
+            <label class="detailTitle detailTitle1">Report due by</label>
+            <input type="text" placeholder="mm/dd/yyyy" class="input-position mininput-size" ng-modal="briefForm.dueDate">
+        </div>
+        <div class="form-group subbtn">
+            <button type="button " class="btn savebtn sbtn" ng-click="saveBrief()">Save</button>
+            <button type="button" class="btn submitbtn sbtn" ng-click="submitBrief()">Submit</button>
+        </div>
+    </form>
+    <!--Information tips-->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 160px;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Warning</h4>
+                </div>
+                <div class="modal-body">The maximum increase is only 4</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger btn-position" data-dismiss="modal">Close</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+</div>
+</section>

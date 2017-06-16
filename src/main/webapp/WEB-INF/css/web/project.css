@@ -1,0 +1,427 @@
+/*header style*/
+/**
+ * 隐藏默认的checkbox
+ */
+input[type=checkbox] {
+    visibility: hidden;
+}
+
+#project-console header {
+	padding: 25px 20px;
+}
+#project-console header .switch-btn {
+	width: 75px;
+	height: 25px;
+	color: #fff;
+	font-size: 12px;
+	margin-right: 15px;
+	opacity: 0.6;
+}
+#project-console header .switch-btn:nth-child(3) {
+	width: 100px;
+}
+#project-console header .switch-btn.active {
+	opacity: 1;
+}
+#project-console  header .switch-btn.initial {
+	background-color: #ffa726;
+	border: 1px solid #fb8c00;
+}
+#project-console  header .switch-btn.proposal {
+	background-color: #29b6f6;
+    border: 1px solid #039be5;
+}
+#project-console  header .switch-btn.approve {
+	background-color: #9DA137;
+    border: 1px solid #84872F;
+}
+#project-console  header .switch-btn.request {
+	background-color: #2baf2b;
+    border: 1px solid #0a8f08;
+}
+#project-console  header .switch-btn.report{
+	background-color: #5c6bc0;
+    border: 1px solid #3949ab;
+}
+#project-console  header .switch-btn.complete {
+	background-color: #A8B6BE;
+    border: 1px solid #92A2AA;
+}
+#project-console  header .switch-btn.all {
+	background-color: #666;
+    border: 1px solid #444;
+}
+#project-console header .add-btn {
+	float: right;
+	border:none;
+	background-color: #f0f0f2;
+	color: #949494;
+}
+#project-console header .add-btn .fa-plus {
+	font-size: 40px;
+}
+#project-console header .search {
+	width: 25%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 12px;
+    text-indent: 4px;
+    padding-right: 26px;
+}
+#project-console header .fa-search {
+	position: relative;
+  left: -36px;
+  width: 31px;
+  height: 30px;
+  color: #949494;
+  font-size: 16px;
+  line-height: 26px;
+  text-align: center;
+  cursor: pointer;
+}
+/*content style*/
+#project-console section{
+    width: 100%;
+	margin: 0px 0px 0px;
+	padding: 5px 0px;
+	background-color: #F0F4FA;
+}
+#project-console  .checkboxFour {
+    width: 14px;
+    height: 14px;
+    background: #ddd;
+    float:left;
+    margin: 2px 0px;
+    border-radius: 100%;
+    position: relative;
+    -webkit-box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+    box-shadow: 0px 1px 1px rgba(0,0,0,0.5);
+}
+#project-console  .checkboxFour label {
+    display: block;
+    width: 9px;
+    height: 9px;
+    border-radius: 100px;
+
+    -webkit-transition: all .5s ease;
+    -moz-transition: all .5s ease;
+    -o-transition: all .5s ease;
+    -ms-transition: all .5s ease;
+    transition: all .5s ease;
+    cursor: pointer;
+    position: absolute;
+    top: 2.5px;
+    left: 2.5px;
+    z-index: 1;
+
+    background: white;
+
+    -webkit-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.5);
+    -moz-box-shadow:inset 0px 1px 1px rgba(0,0,0,0.5);
+    box-shadow:inset 0px 1px 1px rgba(0,0,0,0.5);
+}
+#project-console .checkboxFour input[type=checkbox]:checked + label {
+    background: #222222;
+}
+#project-console .list-data .mainbutton{
+    /*border: 1px solid red;*/
+    width: 483px;
+    height: 250px;
+    float: left;
+    /*color: #F7921E;;*/
+    margin-left: 30px;
+    margin-top: 50px;
+    overflow:hidden;
+    text-align: center;
+    background-color: white;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    padding-top: 98px;
+}
+#project-console .list-data .mainbutton a{
+    text-decoration: none;
+}
+#project-console .list-data .detail-info a{
+    color: #4D9A0F
+}
+#project-console .list-data .mainbutton .maintitle{
+    color: #F7921E;
+    vertical-align:middle;
+    font-size: 20px;
+}
+#project-console .faqinfo{
+    margin-top: 70px;
+    text-align: center;
+}
+#project-console .helpinfo{
+    width: 200px;
+    height: 45px;
+    background-color:#4D9A0F ;
+    color: white;
+}
+/* create a new brief form style*/
+#project-console .creatBrief h3{
+    color: #4D9A0F;
+    font-size: 16px;
+}
+#project-console .creatBrief .brief-form{
+    background-color: white;
+}
+#project-console .creatBrief .brief-form .formgroup{
+    padding-top: 40px;
+}
+#project-console .creatBrief .brief-form .detailTitle1{
+    width:340px;
+}
+#project-console .creatBrief .brief-form .detailTitle{
+    padding-left: 35px;
+}
+#project-console .creatBrief .brief-form .input-position{
+    margin-left:105px;
+}
+#project-console .creatBrief .brief-form .input-size{
+    height: 30px;
+    width: 530px;
+    -moz-border-radius: 6px ;
+    -webkit-border-radius: 6px ;
+    border-radius: 6px ;
+    border:1px solid #c0c0c0;
+}
+#project-console .creatBrief .drop-position{
+    margin-left: 106px;
+    width:194px;
+}
+#project-console .creatBrief .btn-position{
+    position: relative;
+
+    left:-273px;
+}
+#project-console .modal-body{
+    text-align: center;
+    font-size: 16px;
+}
+#project-console .modal-header{
+    color: white;
+    background-color: #D9534F;
+}
+#project-console .creatBrief .brief-form .mininput-size{
+    height: 30px;
+    width: 150px;
+    -moz-border-radius: 6px ;
+    -webkit-border-radius: 6px ;
+    border-radius: 6px ;
+    border:1px solid #c0c0c0;
+}
+#project-console .creatBrief .brief-form .biginput-size{
+    height: 70px;
+    width: 530px;
+    -moz-border-radius: 6px ;
+    -webkit-border-radius: 6px ;
+    border-radius: 6px ;
+    border:1px solid #c0c0c0;
+}
+#project-console .creatBrief .wordsInfo{
+    margin-left: 10px;
+    margin-top: 13px;
+}
+#project-console .creatBrief .brief-form .radio-position{
+    margin-left: 450px;
+    margin-top: 15px;
+}
+#project-console .creatBrief .brief-form .radiopos{
+    margin-right: 30px;
+}
+#project-console .creatBrief .brief-form .label-position{
+     margin-right: 10px;
+}
+#project-console .creatBrief .brief-form .spradio-position{
+    margin-left: 50px;
+    margin-right: 55px;
+    margin-top: 15px;
+}
+#project-console .creatBrief .brief-form .spradio-position1{
+    margin-top: 25px;
+}
+#project-console .creatBrief .brief-form .spradio2-position{
+    margin-right: 95px;
+    margin-top: 15px;
+}
+#project-console .creatBrief .brief-form .spradio2-position2{
+    margin-top: 25px;
+}
+#project-console .creatBrief .brief-form .addbtn{
+    margin-left: 230px;
+    background-color: white;
+    border:1px solid #c0c0c0;
+}
+#project-console .creatBrief .brief-form  .langinfo{
+    background-color: white;
+    border:1px solid #c0c0c0;
+    height:35px;
+}
+#project-console .creatBrief .error-text{
+    color: red;
+    margin-left: 10px;
+}
+#project-console .creatBrief .error-text2{
+    color: red;
+    margin-left: 10px;
+}
+#project-console .creatBrief .error-text3{
+    color: red;
+    margin-left: 10px;
+}
+#project-console .creatBrief .error-text4{
+    color: red;
+    margin-left: 10px;
+}
+
+#project-console .creatBrief .brief-form .labelinfo{
+    position: relative;
+    top: 10px;
+}
+#project-console .creatBrief .brief-form .caret{
+    margin-left: 18px;
+}
+#project-console .creatBrief .brief-form .speinfo{
+    width:120px;
+    position: relative;
+    padding-left: 36px;
+}
+#project-console .creatBrief .brief-form .spegroup{
+    margin-top: 45px;
+}
+#project-console .creatBrief .checkbox-info{
+     margin-left: 30px;
+     margin-right:35px;
+     margin-top: 20px;
+ }
+#project-console .creatBrief .checkbox-info1{
+    margin-left: 30px;
+    margin-right:35px;
+    margin-top: 60px;
+}
+#project-console .creatBrief .brief-form .speradio{
+    margin-right: 30px;
+}
+#project-console .creatBrief .brief-form .speinput-position{
+    margin-left: 70px;
+}
+#project-console .creatBrief .brief-form .speradio-position{
+    width:530px;
+}
+#project-console .creatBrief .brief-form .speradio2-position{
+    margin-left: 450px;
+}
+#project-console .creatBrief .brief-form .biginput2-size{
+    height: 70px;
+    width: 530px;
+    -moz-border-radius: 6px ;
+    -webkit-border-radius: 6px ;
+    border-radius: 6px ;
+    border:1px solid #c0c0c0;
+    margin-left: 30px;
+    position: relative;
+    top:30px;
+}
+#project-console .creatBrief .brief-form .sbtn{
+    -moz-border-radius: 16px ;
+    -webkit-border-radius: 16px ;
+    border-radius: 16px ;
+    width:110px;
+    height: 30px;
+}
+#project-console .creatBrief .brief-form .subbtn{
+    margin-top: 30px;
+}
+#project-console .creatBrief .brief-form .savebtn{
+    background-color: #4D9A0F;
+    color: white;
+    margin-left: 400px;
+    margin-right: 50px;
+}
+#project-console .creatBrief .brief-form .submitbtn{
+    background-color: #F7921E;
+    color: white;
+}
+#project-console .creatBrief .brief-form .position-float{
+    float:left
+}
+#project-console .creatBrief .brief-form .position-float1{
+    margin-left: 6px;
+}
+#project-console .creatBrief .brief-form .dropdown-list{
+    position: relative;
+    float: left;
+}
+#project-console .creatBrief .brief-form .dropdown-list2{
+    position: relative;
+    float: left;
+}
+/*check briefs*/
+#project-console .checkBrief h3{
+    color: #4D9A0F;
+    font-size: 16px;
+    margin-left: 30px;
+}
+#project-console .checkBrief label{
+    font-weight: 400;
+}
+#project-console .checkBrief .implabel{
+    font-weight: 700;
+}
+#project-console .checkBrief .form-group{
+    padding-left: 30px;
+}
+#project-console .checkBrief .first-group{
+    padding-top: 30px;
+}
+#project-console .checkBrief h4{
+    color: #4D9A0F;
+    font-size: 14px;
+    width: 50%;
+    float: left;
+}
+#project-console .checkBrief .receivedinfo{
+    background-color: white;
+    width:48%;
+    float:left;
+    margin-right: 20px;
+}
+#project-console .checkBrief .fa-star{
+    color:#d5d5d5;
+    margin-left: 30px;
+}
+#project-console .checkBrief .star-color{
+    color:#F7921E;
+    margin-left: 30px;
+}
+#project-console .checkBrief .label-title{
+    margin-left: 20px;
+}
+#project-console .checkBrief .label-title1{
+     margin-left: 80px;
+ }
+#project-console .checkBrief .label-title2{
+    margin-left: 100px;
+}
+#project-console .checkBrief .label-title3{
+    margin-left:87px;
+}
+#project-console .checkBrief .label-detinfo{
+    margin-left: 45px;
+}
+#project-console .checkBrief .completed{
+    background-color: white;
+    width:48%;
+    float:left;
+}
+#project-console .paging{
+    text-align: center;
+}
+#project-console .pagination>li>a{
+    border:0px;
+}

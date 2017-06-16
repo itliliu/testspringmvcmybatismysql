@@ -1,0 +1,169 @@
+/** Project brief form of style */
+/*content style*/
+#project-form section.form-content {
+	margin: 0px 20px 15px;
+	padding: 0;
+	border:none;
+	background-color: transparent;
+}
+#project-form section #formTabs.nav-tabs>li>a {
+	color: #555;
+    cursor: default;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-bottom-color: transparent;
+}
+#project-form section #formTabs.nav-tabs>li.active>a,
+#project-form section #formTabs.nav-tabs>li>a.active{
+    color: white;
+    background-color: #FFA726;
+}
+#project-form section #formTabContent {
+	padding: 10px 15px;
+	background-color: white;
+	border: 1px solid #bbb;
+    border-left: 20px solid #78909C; 
+}
+#project-form section #add-brief-form .form-row p {
+	padding-left: 50px;
+	width:100%;
+	height: 30px;
+    background-color: #FF7043;
+    color: white;
+    font-size: 16px;
+    font-weight: bolder;
+    text-align: center;
+    line-height: 31px;
+}
+#project-form section #add-brief-form .form-row:first-child p {
+	padding: 0;
+}
+#project-form section #add-brief-form .form-row p i {
+	float: right;
+	width: 50px;
+    height: 30px;
+    line-height: 30px;
+}
+#project-form section #add-brief-form .form-row p i.active:before {
+	content: "\e252";
+}
+#project-form section #add-brief-form ul {
+	padding-top: 10px;
+}
+#project-form section #add-brief-form label {
+	width:20%;
+	font-weight: 500;
+}
+#project-form section label .required-field {
+	padding-right: 5px;
+	font-size: 20px;
+	color:red;
+}
+#project-form section #add-brief-form .form-control {
+	display: inline-block;
+	width: 76%;
+}
+#project-form section #add-brief-form button {
+	float: right;
+	padding: 0;
+	width: 28px;
+	border: none!important;
+	background: none;
+    font-size: 18px;
+    line-height: 35px;
+}
+#project-form section #add-brief-form .btn-block button {
+	float: none;
+	font-size: 14px;
+}
+#project-form section #add-brief-form .form-float-left {
+	clear: both;
+}
+#project-form section #add-brief-form  li.form-textarea {
+    height: 145px;
+}
+#project-form section #add-brief-form .form-float-left label {
+	float: left;
+	margin-right: 4px;
+}
+#project-form section #add-brief-form .form-float-left textarea {
+	float: left;
+	padding: 10px;
+    width: 76%;
+    border: 1px solid #bbb;
+    border-radius: 4px;
+    resize: none;
+}
+#project-form section #add-brief-form li.form-checkbox .right-content,
+#project-form section #add-brief-form li.form-multiline .right-content {
+	display: block;
+	float:left;
+	margin-bottom: 10px;
+	width: 76%;
+}
+#project-form section #add-brief-form li.form-checkbox .right-content label {
+	width: 24%;
+	height: 30px;
+    line-height: 30px;
+}
+#project-form section #add-brief-form li.form-checkbox .right-content label:nth-child(5) {
+	width: 10%;
+}
+#project-form section #add-brief-form li.form-checkbox .right-content input[type=text] {
+	width: 89%;
+	border: none;
+	border-bottom: 1px solid #bbbbbb;
+}
+#project-form section #add-brief-form li.form-checkbox input[type='checkbox'] {
+	margin-right: 5px;
+}
+#project-form section #add-brief-form li.form-multiline .right-content {
+	width: 79%;
+}
+#project-form section #add-brief-form li.form-multiline .right-content label {
+	margin: 0;
+}
+#project-form section #add-brief-form li.form-multiline .right-content input {
+	margin-bottom: 8px;
+}
+#project-form section #add-brief-form li.form-list label {
+	float: left;
+	margin-right: 4px;
+}
+#project-form section #add-brief-form li.form-list ul.right-content {
+	margin: 0;
+	padding: 0;
+    display: inline-block;
+    width: 76%;
+}
+#project-form section #add-brief-form li.form-list ul.right-content li {
+	width: 100%;
+	height: 40px;
+}
+#project-form section #add-brief-form li.form-list ul.right-content li input {
+	width: 91%;
+}
+#project-form section #add-brief-form li.form-list ul.right-content button {
+	border: none;
+	background: none;
+}
+
+#project-form section #add-brief-form .btn-block {
+	text-align: center;
+}
+#project-form section #add-brief-form .default-btn {
+	margin: 10px 20px;
+    width: 10%;
+    height: 34px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    text-align: center;
+    color: #fff;
+    background-color: #78909c;
+}
+#project-form section #add-brief-form li.form-radio .right-content {
+	display: inline;
+}
+#project-form section #add-brief-form li.form-radio .right-content input {
+	margin-right: 8px;
+}
