@@ -4,6 +4,10 @@
 -- --------------------------------------------------------------------------------
 delimiter $$
 
+CREATE DATABASE `we_project` /*!40100 DEFAULT CHARACTER SET latin1 */$$
+
+delimiter $$
+
 CREATE TABLE `project_brief` (
   `brief_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(11) DEFAULT NULL,
